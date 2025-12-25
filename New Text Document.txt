@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Near Me | Kolkata's Best Budget Gourmet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-brown: #3d2b1f;
+            --mid-brown: #6f4e37;
+            --accent-tan: #c2a382;
+            --cream: #fdf5e6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--dark-brown);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-text { font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(rgba(61, 43, 31, 0.8), rgba(61, 43, 31, 0.8)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-logo { width: 180px; margin-bottom: 20px; border-radius: 50%; border: 4px solid var(--accent-tan); }
+        h1 { font-size: 3rem; margin: 10px 0; }
+        .price-tag { background: var(--accent-tan); color: var(--dark-brown); padding: 5px 20px; font-weight: bold; border-radius: 20px; font-size: 1.2rem; }
+
+        /* Sections */
+        section { padding: 60px 10%; }
+        h2 { text-align: center; color: var(--mid-brown); margin-bottom: 40px; font-size: 2.5rem; }
+
+        /* Founders Section */
+        .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .founder-card { text-align: center; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .founder-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 5px solid var(--accent-tan); }
+
+        /* Menu Section */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .menu-item { background: var(--white); padding: 20px; border-radius: 10px; border-left: 5px solid var(--mid-brown); transition: 0.3s; }
+        .menu-item:hover { transform: translateY(-5px); }
+        .price { font-weight: bold; color: #a0522d; }
+
+        /* Brands Section */
+        .brands { background: var(--dark-brown); color: var(--white); text-align: center; }
+        .brand-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; opacity: 0.8; }
+        .brand-item { font-size: 1.1rem; border: 1px solid var(--accent-tan); padding: 10px 20px; border-radius: 5px; }
+
+        footer { background: #2a1d15; color: var(--cream); text-align: center; padding: 40px; }
+        
+        @media (max-width: 768px) {
+            .founders-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-text">CAFÉ NEAR ME</div>
+        <div>Kolkata's Favorite</div>
+    </nav>
+
+    <header>
+        <img src="main logo.jpg" alt="Logo" class="hero-logo">
+        <h1>Baking & Breakfast Reimagined</h1>
+        <p>Deliciously Budget Friendly. Best in the Nation.</p>
+        <div class="price-tag">Everything at ₹99 or ₹199</div>
+    </header>
+
+    <section id="about">
+        <h2>The Masterminds</h2>
+        <div class="founders-grid">
+            <div class="founder-card">
+                <img src="Screenshot 2025-12-25 223350.png" alt="Shayak Kumar Das" class="founder-img">
+                <h3>Shayak Kumar Das</h3>
+                <p>Chef & Digital Marketing Expert</p>
+            </div>
+            <div class="founder-card">
+                <img src="Screenshot 2025-12-25 223628.jpg" alt="Aindrila Chakraborty" class="founder-img">
+                <h3>Aindrila Chakraborty</h3>
+                <p>Professional Baker & Brand Strategist</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <p>We are a powerhouse duo of <strong>Bakers, Chefs, and Digital Marketers</strong>. With years of experience scaling brands, we have now brought our passion for taste to the streets of Kolkata.</p>
+        </div>
+    </section>
+
+    <section class="brands">
+        <h2>Brands We've Empowered</h2>
+        <div class="brand-list">
+            <span class="brand-item">Kalighata</span>
+            <span class="brand-item">Shesha Poddar Designs</span>
+            <span class="brand-item">Astro Talk</span>
+            <span class="brand-item">Habibs</span>
+            <span class="brand-item">A N John</span>
+            <span class="brand-item">Hunt Jobs India</span>
+            <span class="brand-item">Treehack Technologies</span>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2>Affordable Luxury Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Kachori Alur Dom</h3>
+                <p>Traditional Kolkata flavors with a gourmet twist.</p>
+                <span class="price">₹99</span>
+            </div>
+            <div class="menu-item">
+                <h3>Polau Thali</h3>
+                <p>Fragrant Basanti Polau served with seasonal veg/non-veg.</p>
+                <span class="price">₹199</span>
+            </div>
+            <div class="menu-item">
+                <h3>French Cuisine Burgers</h3>
+                <p>Premium buns, handmade patties, and secret sauces.</p>
+                <span class="price">₹199</span>
+            </div>
+            <div class="menu-item">
+                <h3>Signature Lattes</h3>
+                <p>Coffee house quality at a fraction of the cost.</p>
+                <span class="price">₹99</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Café Near Me - A Shayak & Aindrila Venture</p>
+        <p>Kolkata, West Bengal | Baking • Cooking • Marketing</p>
+    </footer>
+
+</body>
+</html>
