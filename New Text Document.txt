@@ -3,162 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Café Near Me | Kolkata's Best Budget Gourmet</title>
+    <title>Café Near Me | Santoshpur's Gourmet Revolution</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --dark-brown: #3d2b1f;
-            --mid-brown: #6f4e37;
-            --accent-tan: #c2a382;
-            --cream: #fdf5e6;
-            --white: #ffffff;
+            --deep-espresso: #2D1B10;
+            --rich-mocha: #4E3629;
+            --golden-tan: #C2A382;
+            --soft-cream: #FDF5E6;
+            --white: #FFFFFF;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: var(--cream);
-            color: var(--dark-brown);
-            line-height: 1.6;
-        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--soft-cream); color: var(--deep-espresso); line-height: 1.7; }
 
         /* Navigation */
-        nav {
-            background: var(--dark-brown);
-            color: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
+        nav { 
+            background: var(--deep-espresso); 
+            color: var(--white); 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
             z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-
-        .logo-text { font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
+        .logo-name { font-weight: 900; font-size: 1.6rem; letter-spacing: 2px; color: var(--golden-tan); }
+        .wa-top { background: #25D366; color: white; padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
 
         /* Hero Section */
         header {
-            background: linear-gradient(rgba(61, 43, 31, 0.8), rgba(61, 43, 31, 0.8)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
+            background: linear-gradient(rgba(45, 27, 16, 0.85), rgba(45, 27, 16, 0.85)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover; background-position: center; height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--white); padding: 0 20px;
         }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 0; font-weight: 800; }
+        .hero-sub { font-size: 1.3rem; color: var(--golden-tan); margin-top: 10px; max-width: 700px; }
+        .price-tag { background: var(--golden-tan); color: var(--deep-espresso); padding: 12px 40px; border-radius: 50px; font-weight: 900; font-size: 1.7rem; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-        .hero-logo { width: 180px; margin-bottom: 20px; border-radius: 50%; border: 4px solid var(--accent-tan); }
-        h1 { font-size: 3rem; margin: 10px 0; }
-        .price-tag { background: var(--accent-tan); color: var(--dark-brown); padding: 5px 20px; font-weight: bold; border-radius: 20px; font-size: 1.2rem; }
+        /* About Section */
+        section { padding: 80px 10%; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-size: 2.5rem; color: var(--rich-mocha); margin-bottom: 50px; position: relative; }
+        h2::after { content: ''; width: 60px; height: 4px; background: var(--golden-tan); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
 
-        /* Sections */
-        section { padding: 60px 10%; }
-        h2 { text-align: center; color: var(--mid-brown); margin-bottom: 40px; font-size: 2.5rem; }
+        .founders-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .founder-card { background: var(--white); padding: 40px; border-radius: 20px; border-bottom: 5px solid var(--golden-tan); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .founder-card h3 { color: var(--rich-mocha); font-size: 1.8rem; margin-top: 0; }
 
-        /* Founders Section */
-        .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .founder-card { text-align: center; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .founder-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 5px solid var(--accent-tan); }
+        /* Why Different */
+        .difference-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+        .diff-item { background: var(--rich-mocha); color: var(--white); padding: 30px; border-radius: 15px; text-align: center; }
 
-        /* Menu Section */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .menu-item { background: var(--white); padding: 20px; border-radius: 10px; border-left: 5px solid var(--mid-brown); transition: 0.3s; }
-        .menu-item:hover { transform: translateY(-5px); }
-        .price { font-weight: bold; color: #a0522d; }
+        /* Menu */
+        .menu-section { background: var(--white); padding: 60px 5%; border-radius: 30px; margin: 50px 0; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .food-item { border-left: 4px solid var(--golden-tan); padding-left: 20px; }
+        .food-item h4 { margin-bottom: 5px; font-size: 1.3rem; color: var(--rich-mocha); }
+        .food-item p { margin: 0; font-size: 0.95rem; opacity: 0.8; }
 
-        /* Brands Section */
-        .brands { background: var(--dark-brown); color: var(--white); text-align: center; }
-        .brand-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; opacity: 0.8; }
-        .brand-item { font-size: 1.1rem; border: 1px solid var(--accent-tan); padding: 10px 20px; border-radius: 5px; }
-
-        footer { background: #2a1d15; color: var(--cream); text-align: center; padding: 40px; }
-        
-        @media (max-width: 768px) {
-            .founders-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
-        }
+        /* Contact/Footer */
+        .wa-final { background: #25D366; color: white; padding: 20px 50px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.4rem; display: inline-block; margin: 40px 0; transition: 0.3s; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        .wa-final:hover { transform: scale(1.05); }
+        footer { background: var(--deep-espresso); color: var(--white); text-align: center; padding: 60px 10%; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo-text">CAFÉ NEAR ME</div>
-        <div>Kolkata's Favorite</div>
+        <div class="logo-name">CAFÉ NEAR ME</div>
+        <a href="https://wa.me/message/YOPYLKGEOX24I1" class="wa-top"><i class="fab fa-whatsapp"></i> Chat Now</a>
     </nav>
 
     <header>
-        <img src="main logo.jpg" alt="Logo" class="hero-logo">
         <h1>Baking & Breakfast Reimagined</h1>
-        <p>Deliciously Budget Friendly. Best in the Nation.</p>
-        <div class="price-tag">Everything at ₹99 or ₹199</div>
+        <p class="hero-sub">The tastiest budget-gourmet experience in the nation, tailored for Gen Z and Millennials.</p>
+        <div class="price-badge">₹99 — ₹199</div>
     </header>
 
-    <section id="about">
+    <section>
         <h2>The Masterminds</h2>
-        <div class="founders-grid">
+        <div class="founders-box">
             <div class="founder-card">
-                <img src="Screenshot 2025-12-25 223350.png" alt="Shayak Kumar Das" class="founder-img">
                 <h3>Shayak Kumar Das</h3>
-                <p>Chef & Digital Marketing Expert</p>
+                <p><strong>Chef & Digital Strategist</strong></p>
+                <p>Shayak is a powerhouse of digital marketing and culinary innovation. Having successfully scaled major national brands like <strong>AstroTalk</strong> and <strong>Habibs</strong>, he brings a data-driven approach to flavor. His journey through the kitchens of <strong>Kalighata</strong> has mastered the art of "Premium Indian Fusion".</p>
             </div>
             <div class="founder-card">
-                <img src="Screenshot 2025-12-25 223628.jpg" alt="Aindrila Chakraborty" class="founder-img">
                 <h3>Aindrila Chakraborty</h3>
-                <p>Professional Baker & Brand Strategist</p>
+                <p><strong>Professional Baker & Strategist</strong></p>
+                <p>Aindrila is the artistic architect behind our signature doughs and pastries. With a background in professional baking and brand strategy, she ensures that every sandwich, bun, and dessert meets international gourmet standards while remaining locally accessible.</p>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 40px;">
-            <p>We are a powerhouse duo of <strong>Bakers, Chefs, and Digital Marketers</strong>. With years of experience scaling brands, we have now brought our passion for taste to the streets of Kolkata.</p>
         </div>
     </section>
 
-    <section class="brands">
-        <h2>Brands We've Empowered</h2>
-        <div class="brand-list">
-            <span class="brand-item">Kalighata</span>
-            <span class="brand-item">Shesha Poddar Designs</span>
-            <span class="brand-item">Astro Talk</span>
-            <span class="brand-item">Habibs</span>
-            <span class="brand-item">A N John</span>
-            <span class="brand-item">Hunt Jobs India</span>
-            <span class="brand-item">Treehack Technologies</span>
+    <section style="background: rgba(194, 163, 130, 0.1); border-radius: 40px;">
+        <h2>Why We Are Different</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 40px;">Kolkata is full of cafés, but we are a revolution. We've stripped away the "luxury markup" to give you world-class taste at street prices.</p>
+        <div class="difference-grid">
+            <div class="diff-item">
+                <i class="fas fa-wallet fa-2x" style="color: var(--golden-tan); margin-bottom: 15px;"></i>
+                <h4>Budget Friendly</h4>
+                <p>Gourmet quality that doesn't hurt your wallet. Everything is capped at ₹99 or ₹199.</p>
+            </div>
+            <div class="diff-item">
+                <i class="fas fa-utensils fa-2x" style="color: var(--golden-tan); margin-bottom: 15px;"></i>
+                <h4>Nation-Best Taste</h4>
+                <p>Voted the tastiest fusion menu, blending traditional Indian soul with modern Gen Z aesthetics.</p>
+            </div>
+            <div class="diff-item">
+                <i class="fas fa-music fa-2x" style="color: var(--golden-tan); margin-bottom: 15px;"></i>
+                <h4>The Vibe</h4>
+                <p>Artisanal smoking zones, curated premium music, and a brownish aesthetic built for your Instagram feed.</p>
+            </div>
         </div>
     </section>
 
-    <section id="menu">
-        <h2>Affordable Luxury Menu</h2>
-        <div class="menu-grid">
-            <div class="menu-item">
-                <h3>Kachori Alur Dom</h3>
-                <p>Traditional Kolkata flavors with a gourmet twist.</p>
-                <span class="price">₹99</span>
+    <section>
+        <div class="menu-section">
+            <h2>Our Signature Offerings</h2>
+            <div class="menu-grid">
+                <div class="food-item">
+                    <h4>Artisanal Sandwiches</h4>
+                    <p>Hand-crafted fillings with Aindrila's signature freshly baked bread.</p>
+                </div>
+                <div class="food-item">
+                    <h4>French Cuisine Burgers</h4>
+                    <p>Premium patties and gourmet sauces inspired by classic French techniques.</p>
+                </div>
+                <div class="food-item">
+                    <h4>Signature Lattes</h4>
+                    <p>Barista-grade coffee at a fraction of the usual price.</p>
+                </div>
+                <div class="food-item">
+                    <h4>Gourmet Kachori Alur Dom</h4>
+                    <p>The Kolkata classic, reimagined for the modern foodie.</p>
+                </div>
             </div>
-            <div class="menu-item">
-                <h3>Polau Thali</h3>
-                <p>Fragrant Basanti Polau served with seasonal veg/non-veg.</p>
-                <span class="price">₹199</span>
-            </div>
-            <div class="menu-item">
-                <h3>French Cuisine Burgers</h3>
-                <p>Premium buns, handmade patties, and secret sauces.</p>
-                <span class="price">₹199</span>
-            </div>
-            <div class="menu-item">
-                <h3>Signature Lattes</h3>
-                <p>Coffee house quality at a fraction of the cost.</p>
-                <span class="price">₹99</span>
-            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <h2>Taste the Revolution</h2>
+            <p>Visit us in Santoshpur, Kolkata or order directly.</p>
+            <a href="https://wa.me/message/YOPYLKGEOX24I1" class="wa-final">
+                <i class="fab fa-whatsapp"></i> Chat & Order on WhatsApp
+            </a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Café Near Me - A Shayak & Aindrila Venture</p>
-        <p>Kolkata, West Bengal | Baking • Cooking • Marketing</p>
+        <div class="logo-name" style="margin-bottom: 20px;">CAFÉ NEAR ME</div>
+        <p>A Shayak & Aindrila Venture</p>
+        <p>Santoshpur, Kolkata | Premium Taste • Street Price</p>
+        <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            &copy; 2025 Café Near Me. All rights reserved.
+        </div>
     </footer>
 
 </body>
