@@ -3,235 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aesthetica Roots Dental | New Town, Kolkata</title>
+    <title>Aesthetica Roots | Complete Esthetics Solution</title>
+    <!-- Tailwind CSS via CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-slate-50 font-sans text-slate-800 overflow-x-hidden">
 
-    <!-- STICKY HEADER -->
-    <header id="main-header" class="header">
-        <div class="container header-container">
-            <div class="logo">
-                <h2>Aesthetica Roots <span>Dental</span></h2>
+    <!-- Sticky WhatsApp CTA -->
+    <a href="https://wa.me/YOUR_NUMBER" target="_blank" rel="noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-green-500 text-white px-5 py-3 rounded-full shadow-2xl hover:bg-green-600 transition-colors">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+        </span>
+        <span class="font-bold">Chat with Our Doctors</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="w-full bg-white shadow-sm py-4 px-6 md:px-12 flex justify-between items-center z-40 relative">
+        <img src="WhatsApp Image 2026-08-03 at 11.31.56 AM.jpeg" alt="Aesthetica Roots Logo" class="h-16 md:h-20 object-contain nav-logo opacity-0 transform -translate-x-12" />
+        <div class="hidden md:block text-sm font-semibold text-gray-600">
+            Complete Esthetics Solution
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-[80vh] flex flex-col justify-center items-center text-center px-4 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div class="max-w-4xl hero-container">
+            <h1 class="hero-item text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-blue-600 mb-6 drop-shadow-sm opacity-0 transform translate-y-12">
+                Complete Esthetics Solution for a Flawless Smile
+            </h1>
+            <p class="hero-item text-lg md:text-2xl text-gray-700 mb-10 leading-relaxed opacity-0 transform translate-y-12">
+                Experience world-class <strong class="text-purple-700">cosmetic dentistry</strong> and <strong class="text-purple-700">full mouth rehabilitation</strong> at Aesthetica Roots. Precision, comfort, and advanced care—all under one roof.
+            </p>
+            <button class="hero-item bg-purple-700 text-white text-lg font-bold py-4 px-10 rounded-full shadow-lg hover:bg-purple-800 transition-all opacity-0 transform translate-y-12 hover:scale-105 active:scale-95">
+                Book Your Painless Consultation
+            </button>
+        </div>
+    </section>
+
+    <!-- Expert Section -->
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto overflow-hidden">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="relative expert-image opacity-0 transform translate-y-12">
+                <div class="absolute inset-0 bg-blue-200 rounded-[2.5rem] transform rotate-3 scale-105 -z-10 blur-xl opacity-50"></div>
+                <img src="clinic-expert.jpg" alt="Oral Surgery Expert at Aesthetica Roots" class="rounded-[2.5rem] shadow-2xl w-full object-cover border-4 border-white" />
             </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#patients">For Patients</a></li>
-                    <li><a href="#contact">Contact</a></li>
+
+            <div class="expert-text opacity-0 transform translate-x-12">
+                <h2 class="text-4xl font-bold mb-6 text-slate-900">Precision in Every Procedure</h2>
+                <p class="text-lg text-gray-600 mb-6">
+                    When it comes to complex <strong>oral and maxillofacial surgery</strong>, experience matters. At Aesthetica Roots, our specialists bring decades of expertise to every procedure, ensuring your smile transformation is seamless and safe.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="text-purple-600 text-xl">✔</span>
+                        <p class="text-gray-700"><strong>Surgical Precision:</strong> From <strong>painless tooth extractions</strong> to complex orthodontic surgery, we utilize minimally invasive techniques to reduce recovery time.</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-purple-600 text-xl">✔</span>
+                        <p class="text-gray-700"><strong>Step-by-Step Care:</strong> Your journey begins with a comprehensive digital diagnosis, followed by a personalized treatment plan tailored to your anatomical structure.</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-purple-600 text-xl">✔</span>
+                        <p class="text-gray-700"><strong>Anxiety-Free Dentistry:</strong> We prioritize your comfort, offering sedation options to make your surgical experience stress-free.</p>
+                    </li>
                 </ul>
-            </nav>
-            <div class="header-actions">
-                <a href="tel:+919073322322" class="phone-link">+91 9073322322</a>
-                <a href="#contact" class="btn btn-primary">Make An Appointment</a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- HERO SECTION -->
-        <section id="home" class="hero">
-            <div class="hero-overlay"></div>
-            <div class="container hero-content reveal-element fade-up">
-                <p class="tagline">Where Beauty Meets Science. Where Care Meets Excellence.</p>
-                <h1>Comprehensive Dental<br>and Implant Care in<br>New Town, Kolkata</h1>
-                <p class="hero-description">
-                    Aesthetica Roots provides expert, personalized dental care in a supportive, multidisciplinary environment. Serving New Town, Salt Lake, and surrounding areas.
+    <!-- Technology Section -->
+    <section class="py-24 px-6 md:px-12 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-[-20%] left-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="tech-text opacity-0 transform translate-y-12">
+                <h2 class="text-4xl font-bold mb-6">Advanced Dental Technology</h2>
+                <p class="text-lg text-gray-300 mb-8">
+                    We believe that exceptional results require exceptional tools. Aesthetica Roots is equipped with cutting-edge dental technology to guarantee the highest success rates for <strong>dental implants</strong> and structural restorations.
                 </p>
-                <div class="hero-buttons">
-                    <a href="mailto:info@aestheticaroots.com" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Email</a>
-                    <a href="tel:+919073322322" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Phone</a>
-                    <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-location-dot"></i> Location</a>
-                    <a href="#contact" class="btn btn-primary">Make an Appointment</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- MEET THE EXPERTS SECTION -->
-        <section id="about" class="about-section">
-            <div class="container about-grid">
-                <div class="about-image reveal-element slide-right">
-                    <!-- Placeholder for the Doctor/Clinic Image -->
-                    <img src="images/clinic-expert.jpg" alt="Aesthetica Roots Dental Expert">
-                </div>
-                <div class="about-text reveal-element slide-left">
-                    <h2>Meet the Experts:<br>Comprehensive Dental Care</h2>
-                    <p>Our team of highly experienced dentists and specialists provides top-tier dental care, ranging from routine maintenance to complex surgical procedures. We believe in using modern technology and continuing education to improve treatment and enhance patient care.</p>
-                    <p>Our goal is simple: provide gentle, quality, & effective treatment that prioritizes your comfort and long-term dental health under one roof.</p>
-                    <a href="#services" class="btn btn-secondary">Explore Our Services</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES GRID SECTION (Precision-Crafted Solutions) -->
-        <section id="services" class="services-section">
-            <div class="container">
-                <div class="section-header reveal-element fade-up">
-                    <h2>Precision-Crafted Solutions</h2>
-                    <p>We focus on advanced dental and implant services that restore both function and confidence:</p>
-                </div>
-                
-                <div class="services-grid">
-                    <div class="service-card reveal-element fade-up">
-                        <h3>Cosmetic & Restorative</h3>
-                        <p>Smile makeovers and structural tooth repair designed to enhance aesthetic appearance while restoring full function.</p>
-                        <a href="#" class="text-link">Explore Cosmetic Dentistry &rarr;</a>
+                <div class="space-y-6">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
+                        <h3 class="text-xl font-bold text-purple-300 mb-2">CBCT 3D Imaging & Intraoral Scanners</h3>
+                        <p class="text-sm text-gray-300">Before any scalpel is lifted, we capture a flawless 3D map of your jawbone for exact <strong>titanium dental implants</strong> placement. No messy molds—just perfect 3D mockups.</p>
                     </div>
-                    
-                    <div class="service-card reveal-element fade-up" style="transition-delay: 0.1s;">
-                        <h3>Dental Implants</h3>
-                        <p>Long-lasting, natural-looking tooth replacements—from single implants and multiple missing teeth to full-arch supported dentures.</p>
-                        <a href="#" class="text-link">Explore Dental Implants &rarr;</a>
-                    </div>
-                    
-                    <div class="service-card reveal-element fade-up" style="transition-delay: 0.2s;">
-                        <h3>Pediatric Dentistry</h3>
-                        <p>Child-friendly evaluations, early orthodontic assessments, and preventative care for lifelong healthy habits.</p>
-                        <a href="#" class="text-link">Explore Pediatric Care &rarr;</a>
-                    </div>
-                    
-                    <div class="service-card reveal-element fade-up" style="transition-delay: 0.3s;">
-                        <h3>Oral & Maxillofacial Surgery</h3>
-                        <p>Complex surgical solutions handled by precision experts to address foundational structural issues.</p>
-                        <a href="#" class="text-link">Explore Oral Surgery &rarr;</a>
-                    </div>
-
-                    <div class="service-card reveal-element fade-up" style="transition-delay: 0.4s;">
-                        <h3>Orthodontic Treatment</h3>
-                        <p>Advanced solutions for teeth alignment and bite correction tailored to your unique facial structure.</p>
-                        <a href="#" class="text-link">Explore Orthodontics &rarr;</a>
-                    </div>
-
-                    <div class="service-card reveal-element fade-up" style="transition-delay: 0.5s;">
-                        <h3>General Dentistry</h3>
-                        <p>Preventative care, routine cleanings, and simple fillings to maintain overall oral health and catch issues early.</p>
-                        <a href="#" class="text-link">Explore General Dentistry &rarr;</a>
-                    </div>
-                </div>
-                <div class="center-btn reveal-element fade-up">
-                    <a href="#services" class="btn btn-primary">Explore All Services</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- TECHNOLOGY SECTION -->
-        <section class="technology-section">
-            <div class="container tech-grid">
-                <div class="tech-text reveal-element slide-right">
-                    <h2>Advanced Technology,<br>Better Outcomes</h2>
-                    <p>We've equipped our New Town practice with the latest tools to make your care safer, more efficient, and more comfortable. Our investment in technology helps reduce risk, shorten recovery time, and improve every step of your experience.</p>
-                    <ul class="tech-list">
-                        <li><i class="fa-solid fa-check"></i> Complex laser diagnostics for precise treatment planning</li>
-                        <li><i class="fa-solid fa-check"></i> Advanced aesthetic and dermatological synergy</li>
-                        <li><i class="fa-solid fa-check"></i> Modern, comfort-first treatment environments</li>
-                    </ul>
-                </div>
-                <div class="tech-images reveal-element slide-left">
-                     <!-- Placeholder for Tech Images -->
-                     <img src="images/dental-technology.jpg" alt="Dental Technology at Aesthetica Roots">
-                </div>
-            </div>
-        </section>
-
-        <!-- WHY CHOOSE US SECTION (With Hover Effects) -->
-        <section class="why-choose-section">
-            <div class="container">
-                <h2 class="text-center reveal-element fade-up">Why Patients Choose Aesthetica Roots</h2>
-                <div class="features-grid">
-                    <div class="feature-box reveal-element fade-up">
-                        <h4>Unmatched Expertise</h4>
-                        <p>Our board-certified specialists bring decades of combined experience, passionate about delivering exceptional results.</p>
-                    </div>
-                    <div class="feature-box reveal-element fade-up" style="transition-delay: 0.1s;">
-                        <h4>Comprehensive Under One Roof</h4>
-                        <p>Access world-class dental, dermatological, and aesthetic services all in one convenient New Town location.</p>
-                    </div>
-                    <div class="feature-box reveal-element fade-up" style="transition-delay: 0.2s;">
-                        <h4>Comfort-First Environment</h4>
-                        <p>Our modern, spa-like facility is designed to make you feel relaxed and confident throughout your treatment.</p>
-                    </div>
-                    <div class="feature-box reveal-element fade-up" style="transition-delay: 0.3s;">
-                        <h4>Personalized Care</h4>
-                        <p>We take time to understand your unique concerns and goals to create customized solutions specifically for you.</p>
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
+                        <h3 class="text-xl font-bold text-blue-300 mb-2">Piezoelectric & Laser Dentistry</h3>
+                        <p class="text-sm text-gray-300">Using ultrasonic micro-vibrations for bone surgery with pinpoint accuracy, completely preserving soft tissue and promoting faster healing.</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- CONTACT / APPOINTMENT SECTION -->
-        <section id="contact" class="contact-section">
-            <div class="container contact-grid">
-                <div class="contact-info reveal-element slide-right">
-                    <h2>Ready to Take the Next Step?</h2>
-                    <p>Whether you're planning a smile makeover, considering implants, or just looking for a routine checkup — we're here to help.</p>
-                    
-                    <div class="info-blocks">
-                        <div class="info-item">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <div>
-                                <strong>Address:</strong>
-                                <p>Street No. 238, Block CE, Action Area 1C,<br>Newtown, New Town, Kolkata</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fa-solid fa-phone"></i>
-                            <div>
-                                <strong>Contact:</strong>
-                                <p>+91 9073322322</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <i class="fa-regular fa-clock"></i>
-                            <div>
-                                <strong>Hours:</strong>
-                                <p>Every Day - 10:00 AM - 7:30 PM</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-form-container reveal-element slide-left">
-                    <form class="contact-form">
-                        <h3>Contact Us</h3>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
-                        </div>
-                        <div class="form-checkbox">
-                            <input type="checkbox" id="consent" required>
-                            <label for="consent">I have read and agree to the Privacy Policy and Terms Of Use *</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary full-width">Submit Request</button>
-                    </form>
-                </div>
+            <div class="tech-image perspective-1000 opacity-0" style="transform: rotateX(90deg);">
+                <img src="dental-technology.jpg" alt="Advanced Dental Technology and Implants" class="rounded-3xl shadow-2xl w-full object-cover transform-gpu hover:scale-105 transition-transform duration-500" />
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="container footer-bottom">
-            <p>&copy; 2026 Aesthetica Roots Dental. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-white py-16 text-center footer-content opacity-0 transform translate-y-12">
+        <div class="max-w-2xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Ready to Transform Your Smile?</h2>
+            <p class="text-gray-600 mb-8">Join thousands of satisfied patients who trust Aesthetica Roots for their advanced dental care.</p>
+            <p class="text-sm text-gray-400 mt-12">© 2026 Aesthetica Roots. Complete Esthetics Solution.</p>
         </div>
     </footer>
 
-    <!-- Link to JavaScript File -->
+    <!-- GSAP Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
