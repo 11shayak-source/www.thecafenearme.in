@@ -1,94 +1,80 @@
-/**
- * Aesthetica Roots Dental - Landing Page Interactions
- * This script handles the sticky header effect and scroll-triggered animations.
- */
+// Register ScrollTrigger with GSAP
+gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener("DOMContentLoaded", () => {
-    
-    /* =========================================================
-       1. STICKY BLURRED HEADER
-       Adds a 'scrolled' class to the header when the user 
-       scrolls down, changing its background and text colors.
-    ========================================================= */
-    const header = document.getElementById("main-header");
-    
-    // Function to check scroll position
-    const checkScroll = () => {
-        if (window.scrollY > 50) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-    };
+// 1. Logo Animation (Loads immediately)
+gsap.to(".nav-logo", {
+    opacity: 1,
+    x: 0,
+    duration: 1,
+    ease: "power3.out"
+});
 
-    // Run once on load in case the user refreshes halfway down the page
-    checkScroll();
+// 2. Hero Section Stagger Animation
+gsap.to(".hero-item", {
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    stagger: 0.2, // Delays each item slightly for a cascading effect
+    ease: "power3.out",
+    delay: 0.3
+});
 
-    // Listen for scroll events
-    window.addEventListener("scroll", checkScroll);
+// 3. Expert Section (Scroll Triggered)
+gsap.to(".expert-image", {
+    scrollTrigger: {
+        trigger: ".expert-image",
+        start: "top 80%", // Starts animation when top of element hits 80% down the screen
+    },
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: "power3.out"
+});
 
+gsap.to(".expert-text", {
+    scrollTrigger: {
+        trigger: ".expert-text",
+        start: "top 80%",
+    },
+    opacity: 1,
+    x: 0,
+    duration: 1,
+    ease: "power3.out",
+    delay: 0.2
+});
 
-    /* =========================================================
-       2. SCROLL-TRIGGERED REVEAL ANIMATIONS
-       Uses IntersectionObserver to detect when elements enter
-       the viewport, then adds the 'active' class to animate them.
-    ========================================================= */
-    
-    // Select all elements that have the 'reveal-element' class
-    const revealElements = document.querySelectorAll(".reveal-element");
+// 4. Technology Section (Scroll Triggered with 3D Flip)
+gsap.to(".tech-text", {
+    scrollTrigger: {
+        trigger: ".tech-text",
+        start: "top 80%",
+    },
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: "power3.out"
+});
 
-    // Configure the observer
-    const observerOptions = {
-        root: null, // use the viewport as the root
-        rootMargin: "0px", 
-        threshold: 0.15 // Trigger when 15% of the element is visible
-    };
+gsap.to(".tech-image", {
+    scrollTrigger: {
+        trigger: ".tech-image",
+        start: "top 80%",
+    },
+    opacity: 1,
+    rotateX: 0, // 3D flip effect
+    duration: 1.2,
+    ease: "back.out(1.7)",
+    delay: 0.2
+});
 
-    // Create the observer
-    const elementObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            // If the element is in the viewport
-            if (entry.isIntersecting) {
-                // Add the active class to trigger the CSS transition
-                entry.target.classList.add("active");
-                
-                // Optional: Stop observing the element once it has revealed 
-                // (prevents it from hiding/revealing multiple times if they scroll up and down)
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Tell the observer to watch each reveal element
-    revealElements.forEach(element => {
-        elementObserver.observe(element);
-    });
-
-    /* =========================================================
-       3. SMOOTH SCROLLING FOR NAVIGATION LINKS
-       Ensures clicking a header link smoothly scrolls to the section.
-    ========================================================= */
-    const navLinks = document.querySelectorAll('.main-nav a[href^="#"], .header-actions a[href^="#"], .center-btn a[href^="#"], .about-text a[href^="#"]');
-    
-    navLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute("href");
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                // Get the height of the sticky header so it doesn't cover the section title
-                const headerHeight = header.offsetHeight;
-                const elementPosition = targetSection.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-  
-                window.scrollTo({
-                     top: offsetPosition,
-                     behavior: "smooth"
-                });
-            }
-        });
-    });
-
+// 5. Footer (Scroll Triggered)
+gsap.to(".footer-content", {
+    scrollTrigger: {
+        trigger: ".footer-content",
+        start: "top 90%",
+    },
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: "power3.out"
 });
