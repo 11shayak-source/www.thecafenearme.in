@@ -24,25 +24,28 @@
 
     <style>
         html { scroll-behavior: smooth; overscroll-behavior-y: none; }
-        body { background-color: #f8fafc; overflow-x: hidden; cursor: default; -webkit-font-smoothing: antialiased; }
-        ::selection { background-color: #0ea5e9; color: #ffffff; }
+        body { background-color: #f8fafc; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
         .loader-wrapper {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #0f172a; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column;
+            position: fixed; inset: 0; background: #0f172a; z-index: 99999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 0.5s ease;
         }
         .progress-bar { width: 200px; height: 2px; background: rgba(255,255,255,0.2); margin-top: 20px; overflow: hidden; }
         .progress { width: 0%; height: 100%; background: #0ea5e9; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f8fafc; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
-        .magnetic-wrap { display: inline-block; padding: 20px; margin: -20px; }
-        .link-hover::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #0ea5e9; transition: width 0.3s ease; }
-        .link-hover:hover::after { width: 100%; }
-        .card-3d-wrapper { perspective: 1000px; transform-style: preserve-3d; }
-        .card-3d-inner { transition: transform 0.1s ease; transform-style: preserve-3d; }
-        .line-wrap { overflow: hidden; }
+        
+        /* Mobile Layout Fixes */
+        @media (max-width: 768px) {
+            #navbar { flex-direction: column; padding: 15px; }
+            #navbar div { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            .hero-bg { object-position: center; }
+            .card-3d-wrapper { transform: none !important; margin-top: 40px; }
+            
+            /* Stops the carousel from breaking mobile */
+            #pin-container { height: auto !important; display: flex !important; flex-direction: column !important; padding: 60px 0; }
+            #pin-container .w-1\/3 { width: 100% !important; padding: 0 20px !important; margin-bottom: 40px; }
+            #horizontal-scroll { display: flex !important; flex-direction: column !important; height: auto !important; width: 100% !important; transform: none !important; padding: 0 20px; }
+            #horizontal-scroll > div { width: 100% !important; height: auto !important; margin-bottom: 30px; }
+        }
     </style>
 </head>
 <body class="text-slate-800 font-sans">
@@ -52,147 +55,136 @@
         <div class="progress-bar"><div class="progress" id="progress"></div></div>
     </div>
 
-    <div class="fixed bottom-8 right-8 z-50 magnetic-wrap" id="magnetic-cta">
-        <a href="https://wa.me/917001623621" target="_blank" class="flex items-center gap-3 bg-brand-dark text-white px-6 py-4 rounded-full shadow-2xl hover:bg-slate-800 transition-colors pointer-events-auto">
-            <div class="relative flex h-4 w-4">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-accent"></span>
-            </div>
-            <span class="font-bold tracking-wide text-sm">Emergency Relief</span>
-        </a>
-    </div>
+    <a href="https://wa.me/917001623621" target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-brand-dark text-white px-6 py-4 rounded-full shadow-2xl hover:bg-slate-800 transition-all hover:scale-105">
+        <div class="relative flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-accent"></span>
+        </div>
+        <span class="font-bold tracking-wide text-sm hidden md:inline">Emergency Relief</span>
+    </a>
 
-    <nav class="w-full bg-white/90 backdrop-blur-md shadow-sm py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 z-40 transition-transform duration-300" id="navbar">
-        <a href="index.html" class="gsap-nav-item opacity-0 flex items-center gap-3">
-            <img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Logo" class="h-8">
-            <span class="font-serif font-bold text-2xl text-brand-dark">Aesthetica Roots</span>
+    <nav class="w-full bg-white/95 backdrop-blur-md shadow-sm py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 z-40" id="navbar">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Logo" class="h-10">
         </a>
-        <div class="hidden md:flex gap-8 text-sm font-bold text-slate-500 uppercase tracking-widest">
-            <a href="index.html" class="gsap-nav-item opacity-0 relative link-hover hover:text-brand-dark transition-colors">Home</a>
-            <a href="cavities-toothache.html" class="gsap-nav-item opacity-0 relative text-brand-accent after:content-[''] after:absolute after:w-full after:h-[2px] after:bottom-[-4px] after:left-0 after:bg-brand-accent">Cavities & Pain</a>
-            <a href="other-dental-problems.html" class="gsap-nav-item opacity-0 relative link-hover hover:text-brand-dark transition-colors">Other Treatments</a>
+        <div class="flex gap-4 md:gap-8 text-xs md:text-sm font-bold text-slate-500 uppercase tracking-widest">
+            <a href="index.html" class="hover:text-brand-dark transition-colors">Home</a>
+            <a href="cavities-toothache.html" class="text-brand-accent border-b-2 border-brand-accent pb-1">Cavities</a>
+            <a href="other-dental-problems.html" class="hover:text-brand-dark transition-colors">Surgeries</a>
         </div>
     </nav>
 
-    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden bg-slate-900 text-white">
+    <header class="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-900 text-white pt-20">
         <div class="absolute inset-0 z-0">
-            <img src="endodontic-root-canal-hero-bg.jpg" alt="Dental Clinic" class="w-full h-full object-cover opacity-30 scale-110 hero-bg" />
+            <img src="endodontic-root-canal-hero-bg.jpg" alt="Dental Clinic" class="w-full h-full object-cover opacity-30" />
             <div class="absolute inset-0 bg-gradient-to-t from-brand-dark to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-            <p class="gsap-hero-text opacity-0 text-brand-accent font-bold tracking-[0.2em] mb-4 uppercase text-sm md:text-base">Endodontic & Restorative Excellence</p>
-            <h1 class="gsap-hero-text opacity-0 font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-                Beyond the Surface of <span class="italic text-brand-accent">Tooth Decay.</span>
+            <p class="gsap-reveal text-brand-accent font-bold tracking-[0.2em] mb-4 uppercase text-sm md:text-base">Endodontic & Restorative Excellence</p>
+            <h1 class="gsap-reveal font-serif text-4xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                Beyond the Surface of <span class="italic text-brand-accent block md:inline">Tooth Decay.</span>
             </h1>
-            <p class="gsap-hero-text opacity-0 text-lg md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
+            <p class="gsap-reveal text-base md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
                 Comprehensive, deep-dive solutions for severe toothaches. From microscopic cavity detection to highly advanced, single-visit painless root canal treatments.
             </p>
-            <div class="gsap-hero-text opacity-0">
-                <button onclick="document.getElementById('rct-details').scrollIntoView({behavior: 'smooth'})" class="border border-white/30 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-8 py-4 rounded-full transition-all tracking-widest text-sm font-semibold uppercase">
-                    Explore Treatments
-                </button>
-            </div>
         </div>
     </header>
 
-    <section class="py-24 md:py-32 bg-white relative z-20 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16">
+    <section class="py-20 md:py-32 bg-white relative z-20 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
             <div class="lg:w-1/2">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6 reveal-text">Understanding the Pain.</h2>
-                <p class="text-lg text-slate-600 mb-6 leading-relaxed reveal-fade">A toothache is rarely just a temporary inconvenience; it is your body's alarm system signaling that bacteria have breached the protective layers of your tooth.</p>
-                <div class="space-y-8 mt-12">
-                    <div class="reveal-slide-up border-l-4 border-brand-accent pl-6">
-                        <h3 class="font-bold text-xl mb-2">Stage 1: Enamel Demineralization</h3>
-                        <p class="text-slate-600">The outermost layer is compromised. Usually painless, this stage requires preventative care.</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6">Understanding the Pain.</h2>
+                <p class="text-lg text-slate-600 mb-8 leading-relaxed">A toothache is rarely just a temporary inconvenience; it is your body's alarm system signaling that bacteria have breached the protective layers of your tooth.</p>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-brand-accent pl-6 py-2">
+                        <h3 class="font-bold text-xl mb-1">Stage 1: Enamel Demineralization</h3>
+                        <p class="text-slate-600 text-sm md:text-base">The outermost layer is compromised. Requires preventative care.</p>
                     </div>
-                    <div class="reveal-slide-up border-l-4 border-orange-400 pl-6">
-                        <h3 class="font-bold text-xl mb-2">Stage 2: Dentin Decay</h3>
-                        <p class="text-slate-600">Decay reaches the softer, sensitive layer beneath the enamel. Deep tooth-colored fillings are required.</p>
+                    <div class="border-l-4 border-orange-400 pl-6 py-2">
+                        <h3 class="font-bold text-xl mb-1">Stage 2: Dentin Decay</h3>
+                        <p class="text-slate-600 text-sm md:text-base">Decay reaches the sensitive layer. Deep fillings required.</p>
                     </div>
-                    <div class="reveal-slide-up border-l-4 border-red-500 pl-6">
-                        <h3 class="font-bold text-xl mb-2">Stage 3: Pulp Infection (Pulpitis)</h3>
-                        <p class="text-slate-600">The bacteria have reached the inner nerve center. A Root Canal Treatment is absolutely necessary to save the tooth.</p>
+                    <div class="border-l-4 border-red-500 pl-6 py-2">
+                        <h3 class="font-bold text-xl mb-1">Stage 3: Pulp Infection (Pulpitis)</h3>
+                        <p class="text-slate-600 text-sm md:text-base">Bacteria reach the nerve center. Root Canal Treatment is necessary.</p>
                     </div>
                 </div>
             </div>
-            <div class="lg:w-1/2 relative card-3d-wrapper" id="anatomy-card">
-                <div class="card-3d-inner w-full h-full min-h-[500px] rounded-3xl overflow-hidden shadow-2xl relative">
-                    <img src="tooth-decay-anatomy-cross-section.jpg" alt="Anatomy of a tooth" class="w-full h-full object-cover absolute inset-0" />
-                    <div class="absolute inset-0 bg-gradient-to-tr from-brand-dark/80 to-transparent p-10 flex flex-col justify-end">
-                        <span class="text-brand-accent font-mono text-sm tracking-widest mb-2">DIAGNOSTIC IMAGING</span>
-                        <h3 class="text-white font-serif text-3xl font-bold">Cross-Sectional Analysis</h3>
-                    </div>
+            <div class="lg:w-1/2 w-full card-3d-wrapper">
+                <div class="w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl relative">
+                    <img src="tooth-decay-anatomy-cross-section.jpg" alt="Anatomy" class="w-full h-full object-cover" />
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- The Horizontal Carousel Section -->
     <section class="bg-brand-dark text-white overflow-hidden" id="rct-details">
         <div class="h-screen w-full flex items-center relative" id="pin-container">
-            <div class="w-1/3 px-12 z-10 shrink-0">
-                <h2 class="font-serif text-5xl font-bold mb-4">Painless Root Canal Treatment</h2>
-                <p class="text-slate-400 text-lg">Swipe to see how we save your natural tooth using advanced endodontics.</p>
+            <div class="w-1/3 px-6 md:px-12 z-10 shrink-0">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">Painless Root Canal</h2>
+                <p class="text-slate-400 text-base md:text-lg">How we save your natural tooth using advanced endodontics.</p>
             </div>
-            <div class="flex h-[70vh] gap-8 px-8" id="horizontal-scroll">
+            
+            <div class="flex h-[70vh] gap-6 md:gap-8 px-6 md:px-8" id="horizontal-scroll">
                 
-                <div class="w-[60vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-8 flex flex-col justify-between border border-slate-700">
+                <div class="w-[85vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between border border-slate-700">
                     <div>
-                        <div class="text-brand-accent text-6xl font-serif font-bold opacity-20 mb-4">01</div>
-                        <h3 class="text-3xl font-serif font-bold mb-4">Profound Anesthesia</h3>
-                        <p class="text-slate-300 leading-relaxed text-lg">We utilize computerized delivery systems to ensure the area is completely numb.</p>
+                        <div class="text-brand-accent text-5xl font-serif font-bold opacity-20 mb-2">01</div>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-3">Profound Anesthesia</h3>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base">We utilize computerized delivery systems to ensure the area is completely numb.</p>
                     </div>
-                    <img src="painless-local-dental-anesthesia.jpg" class="h-48 w-full object-cover rounded-xl mt-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500" alt="Anesthesia">
+                    <img src="painless-local-dental-anesthesia.jpg" class="h-40 md:h-48 w-full object-cover rounded-xl mt-6" alt="Anesthesia">
                 </div>
 
-                <div class="w-[60vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-8 flex flex-col justify-between border border-slate-700">
+                <div class="w-[85vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between border border-slate-700">
                     <div>
-                        <div class="text-brand-accent text-6xl font-serif font-bold opacity-20 mb-4">02</div>
-                        <h3 class="text-3xl font-serif font-bold mb-4">Access & Extirpation</h3>
-                        <p class="text-slate-300 leading-relaxed text-lg">Using highly flexible rotary files, the infected nerve tissue is meticulously removed.</p>
+                        <div class="text-brand-accent text-5xl font-serif font-bold opacity-20 mb-2">02</div>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-3">Access & Extirpation</h3>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base">Using highly flexible rotary files, the infected nerve tissue is meticulously removed.</p>
                     </div>
-                    <img src="rotary-endodontics-root-canal-cleaning.jpg" class="h-48 w-full object-cover rounded-xl mt-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500" alt="Rotary Endodontics">
+                    <img src="rotary-endodontics-root-canal-cleaning.jpg" class="h-40 md:h-48 w-full object-cover rounded-xl mt-6" alt="Rotary Endodontics">
                 </div>
 
-                <div class="w-[60vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-8 flex flex-col justify-between border border-slate-700">
+                <div class="w-[85vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between border border-slate-700">
                     <div>
-                        <div class="text-brand-accent text-6xl font-serif font-bold opacity-20 mb-4">03</div>
-                        <h3 class="text-3xl font-serif font-bold mb-4">Disinfection & Sealing</h3>
-                        <p class="text-slate-300 leading-relaxed text-lg">The hollowed canals are dried and permanently sealed with Gutta-Percha to prevent reinfection.</p>
+                        <div class="text-brand-accent text-5xl font-serif font-bold opacity-20 mb-2">03</div>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-3">Disinfection & Sealing</h3>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base">The hollowed canals are dried and permanently sealed with Gutta-Percha.</p>
                     </div>
-                    <img src="root-canal-sealing-gutta-percha.jpg" class="h-48 w-full object-cover rounded-xl mt-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500" alt="Sealing">
+                    <img src="root-canal-sealing-gutta-percha.jpg" class="h-40 md:h-48 w-full object-cover rounded-xl mt-6" alt="Sealing">
                 </div>
 
-                <div class="w-[60vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-8 flex flex-col justify-between border border-slate-700">
+                <div class="w-[85vw] md:w-[40vw] h-full shrink-0 bg-slate-800 rounded-3xl p-6 md:p-8 flex flex-col justify-between border border-slate-700">
                     <div>
-                        <div class="text-brand-accent text-6xl font-serif font-bold opacity-20 mb-4">04</div>
-                        <h3 class="text-3xl font-serif font-bold mb-4">Crown Placement</h3>
-                        <p class="text-slate-300 leading-relaxed text-lg">We protect the remaining structure with a custom-milled crown, restoring its full chewing strength.</p>
+                        <div class="text-brand-accent text-5xl font-serif font-bold opacity-20 mb-2">04</div>
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-3">Crown Placement</h3>
+                        <p class="text-slate-300 leading-relaxed text-sm md:text-base">We protect the remaining structure with a custom-milled crown.</p>
                     </div>
-                    <img src="zirconia-ceramic-dental-crown.jpg" class="h-48 w-full object-cover rounded-xl mt-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500" alt="Dental Crown">
+                    <img src="zirconia-ceramic-dental-crown.jpg" class="h-40 md:h-48 w-full object-cover rounded-xl mt-6" alt="Dental Crown">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 md:py-32 bg-slate-50 px-6 md:px-12 relative">
+    <section class="py-20 md:py-32 bg-slate-50 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-20 reveal-fade">
-                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6">Advanced Restorations</h2>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Advanced Restorations</h2>
                 <p class="text-lg text-slate-600">For cavities that haven't reached the nerve, we provide state-of-the-art restorative care.</p>
             </div>
-
-            <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
                 <div class="grid grid-cols-2 gap-4">
-                    <img src="tooth-cavity-before-treatment.jpg" alt="Decayed Tooth" class="rounded-2xl w-full h-64 object-cover reveal-slide-up transform transition-transform hover:-translate-y-2 hover:shadow-xl">
-                    <img src="tooth-cavity-after-composite-filling.jpg" alt="Restored Tooth" class="rounded-2xl w-full h-64 object-cover reveal-slide-up mt-8 transform transition-transform hover:-translate-y-2 hover:shadow-xl" style="transition-delay: 100ms;">
+                    <img src="tooth-cavity-before-treatment.jpg" alt="Decayed Tooth" class="rounded-2xl w-full h-48 md:h-64 object-cover shadow-lg">
+                    <img src="tooth-cavity-after-composite-filling.jpg" alt="Restored Tooth" class="rounded-2xl w-full h-48 md:h-64 object-cover shadow-lg mt-8">
                 </div>
                 <div class="space-y-8">
-                    <div class="reveal-slide-up">
-                        <h3 class="text-2xl font-bold text-brand-dark mb-3">Composite Resins (Tooth-Colored)</h3>
+                    <div>
+                        <h3 class="text-2xl font-bold text-brand-dark mb-2">Composite Resins</h3>
                         <p class="text-slate-600 leading-relaxed">Our composite fillings are crafted from a mixture of plastic and fine glass particles, matching the exact shade of your enamel.</p>
                     </div>
-                    <div class="reveal-slide-up">
-                        <h3 class="text-2xl font-bold text-brand-dark mb-3">Inlays & Onlays</h3>
+                    <div>
+                        <h3 class="text-2xl font-bold text-brand-dark mb-2">Inlays & Onlays</h3>
                         <p class="text-slate-600 leading-relaxed">When a cavity is too large for a standard filling but not severe enough for a full crown, we use custom porcelain inlays and onlays.</p>
                     </div>
                 </div>
@@ -200,41 +192,34 @@
         </div>
     </section>
 
-    <section class="py-24 md:py-32 bg-white px-6 md:px-12 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto text-center mb-16 reveal-fade">
+    <section class="py-20 md:py-32 bg-white px-6 md:px-12 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto text-center mb-16">
             <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-4">Meet Your Specialists</h2>
         </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="bg-slate-50 rounded-[2rem] p-10 flex flex-col items-center text-center shadow-lg border border-slate-100 hover:border-brand-accent transition-colors duration-500 reveal-slide-up">
-                <div class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-md">
-                    <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="bg-slate-50 rounded-[2rem] p-8 flex flex-col items-center text-center shadow-md">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <!-- Object-top added here to fix cropped heads -->
+                    <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover object-top">
                 </div>
-                <h3 class="font-serif text-3xl font-bold text-brand-dark mb-1">Dr. Pratik Sanyal</h3>
-                <p class="text-brand-accent font-bold tracking-widest text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-dark mb-1">Dr. Pratik Sanyal</h3>
+                <p class="text-brand-accent font-bold tracking-widest text-xs md:text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
             </div>
-            <div class="bg-slate-50 rounded-[2rem] p-10 flex flex-col items-center text-center shadow-lg border border-slate-100 hover:border-brand-accent transition-colors duration-500 reveal-slide-up" style="transition-delay: 200ms;">
-                <div class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-md">
-                    <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover">
+            <div class="bg-slate-50 rounded-[2rem] p-8 flex flex-col items-center text-center shadow-md">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <!-- Object-top added here to fix cropped heads -->
+                    <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover object-top">
                 </div>
-                <h3 class="font-serif text-3xl font-bold text-brand-dark mb-1">Dr. Shourjya Sen</h3>
-                <p class="text-brand-accent font-bold tracking-widest text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-dark mb-1">Dr. Shourjya Sen</h3>
+                <p class="text-brand-accent font-bold tracking-widest text-xs md:text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-brand-dark text-slate-400 py-16 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-12 mb-8">
-            <div class="mb-8 md:mb-0 text-center md:text-left">
-                <h2 class="font-serif text-3xl text-white mb-2">Aesthetica Roots</h2>
-                <p>Complete Esthetics & Dental Solution.</p>
-            </div>
-            <div>
-                <a href="https://wa.me/917001623621" target="_blank" class="bg-white text-brand-dark hover:bg-brand-accent hover:text-white px-8 py-4 rounded-full font-bold transition-all inline-block shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(14,165,233,0.4)]">
-                    Schedule Emergency Visit
-                </a>
-            </div>
-        </div>
-        <div class="text-center text-sm"><p>© 2026 Aesthetica Roots. Kolkata. All rights reserved.</p></div>
+    <footer class="bg-brand-dark text-slate-400 py-12 px-6 text-center">
+        <h2 class="font-serif text-2xl md:text-3xl text-white mb-4">Aesthetica Roots</h2>
+        <a href="https://wa.me/917001623621" class="inline-block bg-white text-brand-dark px-8 py-3 rounded-full font-bold mb-8">Schedule Visit</a>
+        <p class="text-xs">© 2026 Aesthetica Roots. Kolkata. All rights reserved.</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -242,55 +227,36 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        const loaderTimeline = gsap.timeline();
-        loaderTimeline.to("#progress", { width: "100%", duration: 1.5, ease: "power2.inOut" })
-            .to("#loader", { yPercent: -100, duration: 0.8, ease: "power4.inOut" })
-            .fromTo(".gsap-nav-item", { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.2")
-            .fromTo(".gsap-hero-text", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.4");
+        // Fail-safe Loader
+        const hideLoader = () => {
+            const loader = document.getElementById('loader');
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+            gsap.to(".gsap-reveal", { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" });
+        };
+        window.addEventListener('load', hideLoader);
+        setTimeout(hideLoader, 1500); // Failsafe timeout
 
-        gsap.to(".hero-bg", { yPercent: 30, ease: "none", scrollTrigger: { trigger: "header", start: "top top", end: "bottom top", scrub: true } });
-
-        let lastScroll = 0;
-        window.addEventListener("scroll", () => {
-            const currentScroll = window.pageYOffset;
-            const navbar = document.getElementById("navbar");
-            if (currentScroll > lastScroll && currentScroll > 100) { navbar.style.transform = "translateY(-100%)"; } 
-            else { navbar.style.transform = "translateY(0)"; }
-            lastScroll = currentScroll;
-        });
-
-        gsap.utils.toArray('.reveal-fade').forEach(elem => {
-            gsap.fromTo(elem, { opacity: 0 }, { opacity: 1, duration: 1, scrollTrigger: { trigger: elem, start: "top 85%" } });
-        });
-        gsap.utils.toArray('.reveal-slide-up').forEach(elem => {
-            gsap.fromTo(elem, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", scrollTrigger: { trigger: elem, start: "top 90%" } });
-        });
-
+        // The Fix for the Carousel - Only runs on Desktop via MatchMedia
         const horizontalScroll = document.getElementById("horizontal-scroll");
-        let tl = gsap.timeline({ scrollTrigger: { trigger: "#pin-container", pin: true, start: "top top", end: () => "+=" + horizontalScroll.scrollWidth, scrub: 1 } });
-        tl.to(horizontalScroll, { x: () => -(horizontalScroll.scrollWidth - document.documentElement.clientWidth + (document.documentElement.clientWidth / 3)), ease: "none" });
+        let mm = gsap.matchMedia();
 
-        const magneticWrap = document.getElementById('magnetic-cta');
-        const magneticBtn = magneticWrap.querySelector('a');
-        magneticWrap.addEventListener('mousemove', (e) => {
-            const rect = magneticWrap.getBoundingClientRect();
-            const x = (e.clientX - rect.left) - (rect.width / 2);
-            const y = (e.clientY - rect.top) - (rect.height / 2);
-            gsap.to(magneticBtn, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
+        mm.add("(min-width: 768px)", () => {
+            // Desktop: Pin and slide horizontally
+            let tl = gsap.timeline({ 
+                scrollTrigger: { 
+                    trigger: "#pin-container", pin: true, start: "top top", 
+                    end: () => "+=" + horizontalScroll.scrollWidth, scrub: 1 
+                } 
+            });
+            tl.to(horizontalScroll, { 
+                x: () => -(horizontalScroll.scrollWidth - document.documentElement.clientWidth + (document.documentElement.clientWidth / 3)), 
+                ease: "none" 
+            });
         });
-        magneticWrap.addEventListener('mouseleave', () => { gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" }); });
-
-        const card3dWrapper = document.getElementById('anatomy-card');
-        const card3dInner = card3dWrapper.querySelector('.card-3d-inner');
-        card3dWrapper.addEventListener('mousemove', (e) => {
-            const rect = card3dWrapper.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2; const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -15; const rotateY = ((x - centerX) / centerX) * 15;
-            card3dInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        card3dWrapper.addEventListener('mouseleave', () => { card3dInner.style.transform = `rotateX(0deg) rotateY(0deg)`; });
+        // On mobile (<768px), MatchMedia does nothing, and the CSS rules handle normal vertical stacking.
     </script>
 </body>
 </html>
