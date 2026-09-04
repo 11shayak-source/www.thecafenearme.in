@@ -54,7 +54,7 @@
         @media (max-width: 768px) {
             .pill-nav { width: 100%; top: 0; border-radius: 0; flex-direction: column; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
             .pill-nav div { margin-top: 12px; flex-wrap: wrap; justify-content: center; gap: 12px; }
-            .hero-bg { background-attachment: scroll; } /* Fixes iOS bug */
+            .hero-bg { background-attachment: scroll; } /* Fixes iOS parallax bug */
         }
         
         /* Scrollbars */
@@ -105,26 +105,57 @@
     <!-- Doctors Section -->
     <section class="py-20 md:py-32 bg-white px-6 md:px-12 relative z-20">
         <div class="max-w-7xl mx-auto text-center mb-16">
-            <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-4 scroll-fade">Meet Our Surgeons</h2>
-            <p class="text-slate-500 text-lg scroll-fade">A combined legacy of excellence in modern dentistry.</p>
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-4 scroll-fade">Meet Our Specialists</h2>
+            <p class="text-slate-500 text-lg scroll-fade">A combined legacy of excellence in modern dentistry and cosmetology.</p>
         </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
-            <div class="bg-slate-50 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade">
-                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+        
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
+            
+            <!-- Dr. Pratik Sanyal -->
+            <div class="bg-slate-50 rounded-[2rem] p-8 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade h-full">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm shrink-0">
                     <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover object-top">
                 </div>
                 <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Pratik Sanyal</h3>
-                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
-                <p class="text-slate-600 text-sm md:text-base leading-relaxed">Specializing in modern restorative procedures, Dr. Sanyal brings a meticulous approach to diagnostics and patient care utilizing the latest digital workflows.</p>
+                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-1">Dental Surgeon (BDS)</p>
+                <p class="text-brand-accent font-bold text-sm mb-6 bg-brand-light/50 px-4 py-1 rounded-full">5 Years of Experience</p>
+                
+                <div class="bg-white w-full rounded-2xl p-6 shadow-sm border border-slate-100 flex-grow flex items-center justify-center">
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        Specializing in modern restorative procedures, Dr. Sanyal brings a meticulous approach to diagnostics and patient care utilizing the latest digital workflows for pain-free dentistry.
+                    </p>
+                </div>
             </div>
-            <div class="bg-slate-50 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade delay-100">
-                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+
+            <!-- Dr. Shourjya Sen -->
+            <div class="bg-slate-50 rounded-[2rem] p-8 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade delay-100 h-full">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm shrink-0">
                     <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover object-top">
                 </div>
                 <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Shourjya Sen</h3>
-                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
-                <p class="text-slate-600 text-sm md:text-base leading-relaxed">With extensive clinical experience, Dr. Sen is highly skilled in complex extractions, endodontics, and comprehensive oral rehabilitation prioritizing anxiety-free surgery.</p>
+                <p class="text-brand-secondary font-bold tracking-widest text-[10px] md:text-xs uppercase mb-1">BDS, FICS (Reg. 8064 A)</p>
+                <p class="text-brand-accent font-bold text-sm mb-6 bg-brand-light/50 px-4 py-1 rounded-full">8 Years of Experience</p>
+                
+                <div class="bg-white w-full rounded-2xl p-5 md:p-6 shadow-sm border border-slate-100 text-left text-xs md:text-sm leading-relaxed space-y-3 flex-grow">
+                    <p class="flex items-start gap-2">
+                        <span class="text-brand-secondary mt-0.5">✦</span> 
+                        <span><strong>Patent Owner:</strong> Endodontic Apex Window</span>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <span class="text-brand-secondary mt-0.5">✦</span> 
+                        <span><strong>Fellowships:</strong> Implantology, Veneers Cosmetic Dentistry, Cosmetology</span>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <span class="text-brand-secondary mt-0.5">✦</span> 
+                        <span><strong>Diplomas:</strong> Exosome Therapy, IV Drips (Glutathione)</span>
+                    </p>
+                    <p class="flex items-start gap-2">
+                        <span class="text-brand-secondary mt-0.5">✦</span> 
+                        <span><strong>Certified:</strong> Derma Nutrition</span>
+                    </p>
+                </div>
             </div>
+
         </div>
     </section>
 
