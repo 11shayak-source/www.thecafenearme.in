@@ -1,80 +1,101 @@
 // Register ScrollTrigger with GSAP
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. Logo Animation (Loads immediately)
-gsap.to(".nav-logo", {
-    opacity: 1,
-    x: 0,
-    duration: 1,
-    ease: "power3.out"
-});
+// Create a Master Timeline for the initial page load sequence
+const loadTl = gsap.timeline();
 
-// 2. Hero Section Stagger Animation
-gsap.to(".hero-item", {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    stagger: 0.2, // Delays each item slightly for a cascading effect
-    ease: "power3.out",
-    delay: 0.3
-});
+// 1. Logo & Nav Reveal (Cinematic Slide & Fade)
+loadTl.fromTo(".nav-logo", 
+    { opacity: 0, x: -50, rotate: -5 },
+    { opacity: 1, x: 0, rotate: 0, duration: 1.2, ease: "expo.out" }
+)
+.fromTo(".nav-menu a", 
+    { opacity: 0, y: -20 },
+    { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" },
+    "-=1" // Overlaps with the logo animation for a fluid start
+);
 
-// 3. Expert Section (Scroll Triggered)
-gsap.to(".expert-image", {
-    scrollTrigger: {
-        trigger: ".expert-image",
-        start: "top 80%", // Starts animation when top of element hits 80% down the screen
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power3.out"
-});
+// 2. Hero Section (Staggered upward float with slight scale)
+loadTl.fromTo(".hero-item", 
+    { opacity: 0, y: 60, scale: 0.95 },
+    { opacity: 1, y: 0, scale: 1, duration: 1.5, stagger: 0.15, ease: "power4.out" },
+    "-=0.8" // Triggers right before the nav finishes
+);
 
-gsap.to(".expert-text", {
-    scrollTrigger: {
-        trigger: ".expert-text",
-        start: "top 80%",
-    },
-    opacity: 1,
-    x: 0,
-    duration: 1,
-    ease: "power3.out",
-    delay: 0.2
-});
+// 3. Expert Section (Advanced Parallax & Scroll Scrubbing)
+gsap.fromTo(".expert-image", 
+    { opacity: 0, scale: 0.8, y: 100 },
+    { 
+        scrollTrigger: { 
+            trigger: ".expert-image", 
+            start: "top 90%", 
+            end: "center center", 
+            scrub: 1 // Ties the animation to the user's scroll speed
+        },
+        opacity: 1, 
+        scale: 1, 
+        y: 0, 
+        ease: "none" 
+    }
+);
 
-// 4. Technology Section (Scroll Triggered with 3D Flip)
-gsap.to(".tech-text", {
-    scrollTrigger: {
-        trigger: ".tech-text",
-        start: "top 80%",
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power3.out"
-});
+gsap.fromTo(".expert-text", 
+    { opacity: 0, x: 50 },
+    {
+        scrollTrigger: { 
+            trigger: ".expert-text", 
+            start: "top 80%" 
+        },
+        opacity: 1, 
+        x: 0, 
+        duration: 1.2, 
+        ease: "power3.out"
+    }
+);
 
-gsap.to(".tech-image", {
-    scrollTrigger: {
-        trigger: ".tech-image",
-        start: "top 80%",
-    },
-    opacity: 1,
-    rotateX: 0, // 3D flip effect
-    duration: 1.2,
-    ease: "back.out(1.7)",
-    delay: 0.2
-});
+// 4. Technology Section (Deep 3D Flip)
+gsap.fromTo(".tech-text", 
+    { opacity: 0, y: 50 },
+    {
+        scrollTrigger: { 
+            trigger: ".tech-text", 
+            start: "top 85%" 
+        },
+        opacity: 1, 
+        y: 0, 
+        duration: 1, 
+        ease: "power2.out"
+    }
+);
 
-// 5. Footer (Scroll Triggered)
-gsap.to(".footer-content", {
-    scrollTrigger: {
-        trigger: ".footer-content",
-        start: "top 90%",
-    },
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power3.out"
-});
+gsap.fromTo(".tech-image", 
+    { opacity: 0, rotateX: 90, rotateY: -10, z: -300 }, // Starts pushed back in 3D space
+    {
+        scrollTrigger: { 
+            trigger: ".tech-image", 
+            start: "top 80%" 
+        },
+        opacity: 1, 
+        rotateX: 0, 
+        rotateY: 0, 
+        z: 0, // Snaps forward to standard depth
+        duration: 1.5, 
+        ease: "back.out(1.5)"
+    }
+);
+
+// 5. Footer (Upward Swell)
+gsap.fromTo(".footer-content", 
+    { opacity: 0, y: 100, scale: 0.95 },
+    {
+        scrollTrigger: { 
+            trigger: ".footer-content", 
+            start: "top 95%" 
+        },
+        opacity: 1, 
+        y: 0, 
+        scale: 1, 
+        duration: 1.2, 
+        ease: "expo.out"
+    }
+);
