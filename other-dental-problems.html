@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Expert treatment for complex dental issues in Kolkata. Specializing in Orthodontics, Periodontics, Oral Surgery, and Full Mouth Rehabilitation at Aesthetica Roots.">
+    <meta name="description" content="Expert treatment for complex dental issues in Kolkata. Orthodontics, Periodontics, Oral Surgery.">
     <title>Advanced Dental Solutions | Aesthetica Roots</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,209 +24,151 @@
 
     <style>
         html { scroll-behavior: smooth; overscroll-behavior-y: none; }
-        body { background-color: #f8fafc; overflow-x: hidden; cursor: none; -webkit-font-smoothing: antialiased; }
-        ::selection { background-color: #4f46e5; color: #ffffff; }
+        body { background-color: #f8fafc; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
-        .custom-cursor { width: 20px; height: 20px; border: 2px solid var(--brand-accent, #818cf8); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s; }
-        .cursor-dot { width: 4px; height: 4px; background: var(--brand-secondary, #4338ca); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); }
-        @media (max-width: 768px) { body { cursor: auto; } .custom-cursor, .cursor-dot { display: none; } }
-
-        .loader-overlay { position: fixed; inset: 0; background: #312e81; z-index: 100000; display: flex; justify-content: center; align-items: center; clip-path: circle(150% at 50% 50%); transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1); }
-        .loader-overlay.hidden-load { clip-path: circle(0% at 50% 50%); }
-
-        .pill-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: all 0.4s ease; }
-        .mask-text-wrap { overflow: hidden; display: block; }
-        .mask-text-inner { display: block; transform: translateY(110%); }
-
-        .split-image-container { position: relative; overflow: hidden; border-radius: 1.5rem; }
-        .split-image-container img { transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
-        .split-overlay { position: absolute; inset: 0; background-image: url('invisible-clear-aligners-teeth-straightening.jpg'); background-size: cover; background-position: center; clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); transition: clip-path 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
-        .split-image-container:hover .split-overlay { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-        .split-image-container:hover img { transform: scale(1.05); }
-
-        .zoom-parallax-wrap { overflow: hidden; border-radius: 2rem; height: 60vh; }
-        .zoom-parallax-img { width: 100%; height: 120%; object-fit: cover; transform: translateY(-10%); }
+        .loader-overlay { position: fixed; inset: 0; background: #312e81; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        .pill-nav { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f8fafc; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+        .split-image-container { position: relative; overflow: hidden; border-radius: 1.5rem; cursor: pointer; }
+        .split-image-container img { transition: transform 0.5s ease; }
+        .split-overlay { position: absolute; inset: 0; background-image: url('invisible-clear-aligners-teeth-straightening.jpg'); background-size: cover; background-position: center; clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); transition: clip-path 0.5s ease; }
+        
+        /* Desktop Hover Logic */
+        @media (min-width: 768px) {
+            .split-image-container:hover .split-overlay { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            .split-image-container:hover img { transform: scale(1.05); }
+        }
+        
+        /* Mobile Touch Logic (Handled via JS toggle class) */
+        .split-image-container.active-split .split-overlay { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        @media (max-width: 768px) {
+            .pill-nav { width: 100%; top: 0; border-radius: 0; flex-direction: column; padding: 15px; }
+            .pill-nav div { margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+            .hero-img-wrap { height: 350px !important; margin-top: 30px; }
+            section { padding-top: 60px !important; padding-bottom: 60px !important; }
+        }
     </style>
 </head>
 <body class="text-slate-800 font-sans">
 
-    <div class="custom-cursor" id="custom-cursor"></div>
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="loader-overlay" id="loader"><h2 class="font-serif text-3xl md:text-5xl italic text-brand-light tracking-widest">Restoring Form & Function</h2></div>
 
-    <div class="loader-overlay" id="loader"><h2 class="font-serif text-5xl italic text-brand-light tracking-widest">Restoring Form & Function</h2></div>
-
-    <div class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-4xl rounded-full pill-nav px-6 py-3 flex justify-between items-center hover-target">
+    <div class="fixed top-6 md:top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95%] md:w-[90%] max-w-4xl rounded-2xl md:rounded-full pill-nav px-4 py-3 flex md:flex-row flex-col justify-between items-center">
         <a href="index.html" class="flex items-center gap-2">
-            <img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Logo" class="h-6">
-            <span class="font-serif font-bold text-xl text-brand-primary">Aesthetica Roots</span>
+            <img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Logo" class="h-8">
         </a>
-        <div class="hidden md:flex gap-6 text-xs font-bold text-slate-500 uppercase tracking-widest items-center">
+        <div class="flex gap-4 md:gap-6 text-xs font-bold text-slate-500 uppercase tracking-widest items-center">
             <a href="index.html" class="hover:text-brand-secondary transition-colors">Home</a>
-            <a href="cavities-toothache.html" class="hover:text-brand-secondary transition-colors">Cavities & Pain</a>
-            <a href="other-dental-problems.html" class="text-brand-primary px-4 py-2 bg-brand-light rounded-full">Other Treatments</a>
-            <a href="https://wa.me/917001623621" class="bg-brand-primary text-white px-5 py-2 rounded-full hover:bg-brand-secondary transition-colors">Consult</a>
+            <a href="cavities-toothache.html" class="hover:text-brand-secondary transition-colors">Cavities</a>
+            <a href="other-dental-problems.html" class="text-brand-primary border-b-2 border-brand-primary pb-1">Surgeries</a>
+            <a href="https://wa.me/917001623621" class="bg-brand-primary text-white px-4 py-2 rounded-full hidden md:inline-block">Consult</a>
         </div>
     </div>
 
-    <header class="relative w-full min-h-screen flex items-center bg-gradient-to-br from-indigo-50 to-white px-6 md:px-12 pt-24 overflow-hidden">
-        <div class="absolute right-[-10%] top-[10%] w-[50vw] h-[50vw] rounded-full bg-brand-light mix-blend-multiply blur-[120px] opacity-60"></div>
-        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center relative z-10">
+    <header class="relative w-full min-h-screen flex items-center bg-gradient-to-br from-indigo-50 to-white px-6 md:px-12 pt-32 pb-16 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 items-center relative z-10">
             <div>
-                <span class="block text-brand-secondary font-bold tracking-[0.3em] uppercase text-sm mb-6 mask-text-wrap"><span class="mask-text-inner hero-elem">Comprehensive Rehabilitation</span></span>
-                <h1 class="font-serif text-6xl md:text-8xl font-bold leading-[1.1] text-brand-primary mb-8">
-                    <span class="mask-text-wrap"><span class="mask-text-inner hero-elem">Mastering</span></span>
-                    <span class="mask-text-wrap"><span class="mask-text-inner hero-elem italic font-light text-brand-secondary">Complex</span></span>
-                    <span class="mask-text-wrap"><span class="mask-text-inner hero-elem">Dental Cases.</span></span>
+                <span class="block text-brand-secondary font-bold tracking-widest uppercase text-xs md:text-sm mb-4">Comprehensive Rehabilitation</span>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight text-brand-primary mb-6">
+                    Mastering <span class="italic font-light text-brand-secondary block">Complex Cases.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-lg mask-text-wrap"><span class="mask-text-inner hero-elem">From impacted wisdom teeth and severe malocclusion to advanced periodontal disease. We rebuild your oral health from the roots up.</span></p>
+                <p class="text-base md:text-xl text-slate-600 mb-8 max-w-lg">From impacted wisdom teeth and severe malocclusion to advanced periodontal disease. We rebuild your oral health from the roots up.</p>
             </div>
-            <div class="relative h-[60vh] lg:h-[80vh] w-full rounded-[2rem] overflow-hidden shadow-2xl hero-img-wrap transform translate-y-12 opacity-0 hover-target">
+            <div class="relative h-[300px] md:h-[60vh] w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl hero-img-wrap">
                 <img src="advanced-dental-surgery-hero.jpg" alt="Dental Aesthetics" class="w-full h-full object-cover">
             </div>
         </div>
     </header>
 
-    <section id="orthodontics" class="py-24 md:py-32 bg-white px-6 md:px-12">
+    <section class="py-16 md:py-32 bg-white px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 mask-text-wrap">
-                <div class="mask-text-inner scroll-mask">
-                    <h2 class="font-serif text-5xl md:text-6xl font-bold text-brand-primary mb-4">Orthodontics</h2>
-                    <p class="text-xl text-slate-500 font-light tracking-wide">Aligning bites, correcting malocclusion.</p>
-                </div>
+            <div class="mb-12">
+                <h2 class="font-serif text-4xl md:text-6xl font-bold text-brand-primary mb-2">Orthodontics</h2>
+                <p class="text-lg text-slate-500 font-light">Aligning bites, correcting malocclusion.</p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="split-image-container h-[500px] shadow-xl hover-target cursor-none">
+            <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+                <!-- Split Image Container (Interactive) -->
+                <div class="split-image-container h-[350px] md:h-[500px] shadow-xl" id="split-box" onclick="this.classList.toggle('active-split')">
                     <img src="traditional-ceramic-braces-orthodontics.jpg" alt="Traditional Braces" class="w-full h-full object-cover">
-                    <div class="split-overlay hidden-mobile-pseudo" style="background-image: url('invisible-clear-aligners-teeth-straightening.jpg');"></div>
-                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 hover-opacity transition-opacity duration-300">
-                        <span class="bg-brand-primary text-white px-6 py-2 rounded-full tracking-widest text-xs uppercase font-bold shadow-lg">Hover to Reveal Aligners</span>
+                    <div class="split-overlay"></div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span class="bg-brand-primary text-white px-4 py-2 rounded-full tracking-widest text-[10px] md:text-xs uppercase font-bold shadow-lg opacity-90">Tap to Reveal Aligners</span>
                     </div>
                 </div>
 
-                <div class="space-y-12">
-                    <div class="scroll-fade-up">
-                        <h3 class="text-2xl font-bold text-brand-primary mb-4 flex items-center gap-4"><span class="w-8 h-[2px] bg-brand-accent block"></span> Invisible Aligners (Clear Path)</h3>
-                        <p class="text-slate-600 leading-relaxed text-lg">For adults and teens seeking a discreet solution to crooked teeth. We fabricate a series of custom, virtually invisible trays.</p>
+                <div class="space-y-8 md:space-y-12">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-brand-primary mb-3">Invisible Aligners (Clear Path)</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm md:text-lg">For adults and teens seeking a discreet solution to crooked teeth. We fabricate a series of custom, virtually invisible trays that gently shift your teeth into perfect alignment.</p>
                     </div>
-                    <div class="scroll-fade-up">
-                        <h3 class="text-2xl font-bold text-brand-primary mb-4 flex items-center gap-4"><span class="w-8 h-[2px] bg-brand-accent block"></span> Advanced Metal & Ceramic Braces</h3>
-                        <p class="text-slate-600 leading-relaxed text-lg">For severe crowding and complex jaw misalignments, we utilize low-profile ceramic brackets that blend with your natural tooth color.</p>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-brand-primary mb-3">Advanced Ceramic Braces</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm md:text-lg">For severe crowding and complex jaw misalignments, traditional orthodontics remain the gold standard. We utilize low-profile ceramic brackets that blend with your natural tooth color.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="w-full px-6 md:px-12 py-12 bg-slate-50">
-        <div class="max-w-7xl mx-auto zoom-parallax-wrap hover-target">
-            <img src="modern-dental-surgery-suite-kolkata.jpg" alt="Advanced Surgery Room" class="zoom-parallax-img" id="parallax-img-1">
-            <div class="absolute inset-0 bg-brand-primary/40 flex items-center justify-center">
-                <h2 class="font-serif text-4xl md:text-6xl text-white font-bold text-center px-4">State-of-the-Art Surgical Suites</h2>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 md:py-32 bg-brand-primary text-white px-6 md:px-12 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('dark-texture-overlay.png')] opacity-10 mix-blend-overlay"></div>
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+    <!-- Dark Rehabilitation Section (With Fixed PNG Overlay) -->
+    <section class="py-20 md:py-32 bg-brand-primary text-white px-6 md:px-12 relative overflow-hidden">
+        <!-- The PNG noise texture overlay (Ensure it is uploaded as .png to GitHub!) -->
+        <div class="absolute inset-0 bg-[url('dark-texture-overlay.png')] opacity-20 mix-blend-overlay"></div>
+        
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div>
-                <h2 class="font-serif text-5xl md:text-6xl font-bold mb-8 scroll-fade-up text-brand-light">Full Mouth Rehabilitation.</h2>
-                <p class="text-xl text-indigo-200 leading-relaxed mb-8 scroll-fade-up">For patients suffering from severe dental trauma, widespread decay, or missing multiple teeth, a single procedure isn't enough. We engineer a holistic blueprint to entirely rebuild your smile and bite.</p>
+                <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6 text-brand-light">Full Mouth Rehabilitation.</h2>
+                <p class="text-lg md:text-xl text-indigo-200 leading-relaxed mb-6">For patients suffering from severe dental trauma, widespread decay, or missing multiple teeth, a single procedure isn't enough. We engineer a holistic blueprint to entirely rebuild your smile and bite.</p>
             </div>
-            <div class="relative h-[600px] rounded-[2rem] overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover-target">
-                <img src="dental-implant-prosthodontics-rehab.jpg" alt="Dental Implants and Crowns" class="w-full h-full object-cover">
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 md:py-32 bg-white px-6 md:px-12 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto text-center mb-16 mask-text-wrap">
-            <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-primary mb-4 mask-text-inner scroll-mask">The Surgical & Restorative Team</h2>
-        </div>
-        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-            <div class="bg-brand-light/30 rounded-[2rem] p-10 flex flex-col items-center text-center shadow-lg border border-transparent hover:border-brand-accent transition-colors duration-500 scroll-fade-up hover-target">
-                <div class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-md">
-                    <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-serif text-3xl font-bold text-brand-primary mb-1">Dr. Pratik Sanyal</h3>
-                <p class="text-brand-secondary font-bold tracking-widest text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
-            </div>
-            <div class="bg-brand-light/30 rounded-[2rem] p-10 flex flex-col items-center text-center shadow-lg border border-transparent hover:border-brand-accent transition-colors duration-500 scroll-fade-up hover-target" style="transition-delay: 200ms;">
-                <div class="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-md">
-                    <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-serif text-3xl font-bold text-brand-primary mb-1">Dr. Shourjya Sen</h3>
-                <p class="text-brand-secondary font-bold tracking-widest text-sm uppercase mb-4">Dental Surgeon (BDS)</p>
+            <div class="relative h-[300px] md:h-[500px] rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-white/20">
+                <img src="dental-implant-prosthodontics-rehab.jpg" alt="Dental Implants" class="w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-400 py-16 px-6 md:px-12">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-12 mb-8">
-            <div class="mb-8 md:mb-0 text-center md:text-left">
-                <h2 class="font-serif text-3xl text-white mb-2">Aesthetica Roots</h2>
-                <p>Complete Esthetics & Dental Solution.</p>
+    <section class="py-20 md:py-32 bg-white px-6 md:px-12 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto text-center mb-12 md:mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-2">The Surgical Team</h2>
+        </div>
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12">
+            <div class="bg-brand-light/30 rounded-2xl md:rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <!-- Object-top fixes cropped head -->
+                    <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover object-top">
+                </div>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Pratik Sanyal</h3>
+                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
             </div>
-            <div>
-                <a href="https://wa.me/917001623621" target="_blank" class="bg-brand-secondary text-white hover:bg-brand-accent hover:text-slate-900 px-8 py-4 rounded-full font-bold transition-all inline-block hover-target">Request a Consultation</a>
+            <div class="bg-brand-light/30 rounded-2xl md:rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <!-- Object-top fixes cropped head -->
+                    <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover object-top">
+                </div>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Shourjya Sen</h3>
+                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
             </div>
         </div>
-        <div class="text-center text-sm"><p>© 2026 Aesthetica Roots. Kolkata. All rights reserved.</p></div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 text-center">
+        <h2 class="font-serif text-2xl md:text-3xl text-white mb-4">Aesthetica Roots</h2>
+        <a href="https://wa.me/917001623621" class="inline-block bg-brand-secondary text-white px-8 py-3 rounded-full font-bold mb-8">Consult a Specialist</a>
+        <p class="text-xs">© 2026 Aesthetica Roots. Kolkata. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-
-        window.addEventListener('load', () => {
+        // Simple Fail-safe Loader
+        const hideLoader = () => {
             const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.classList.add('hidden-load');
-                setTimeout(() => loader.style.display = 'none', 1500); 
-                gsap.to(".hero-elem", { y: "0%", duration: 1, stagger: 0.1, ease: "power4.out", delay: 0.5 });
-                gsap.to(".hero-img-wrap", { y: 0, opacity: 1, duration: 1.5, ease: "power3.out", delay: 0.8 });
-            }, 500);
-        });
-
-        const cursor = document.getElementById('custom-cursor');
-        const dot = document.getElementById('cursor-dot');
-        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
-        if (window.matchMedia("(pointer: fine)").matches) {
-            window.addEventListener('mousemove', (e) => {
-                dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-                cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
-            });
-            hoverTargets.forEach(target => {
-                target.addEventListener('mouseenter', () => { cursor.style.width = '50px'; cursor.style.height = '50px'; cursor.style.backgroundColor = 'rgba(129, 140, 248, 0.2)'; cursor.style.mixBlendMode = 'difference'; });
-                target.addEventListener('mouseleave', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.backgroundColor = 'transparent'; cursor.style.mixBlendMode = 'normal'; });
-            });
-        }
-
-        gsap.utils.toArray('.scroll-mask').forEach(elem => {
-            gsap.to(elem, { y: "0%", duration: 1, ease: "power3.out", scrollTrigger: { trigger: elem.parentElement, start: "top 90%" } });
-        });
-        gsap.utils.toArray('.scroll-fade-up').forEach(elem => {
-            gsap.fromTo(elem, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, ease: "power2.out", scrollTrigger: { trigger: elem, start: "top 85%" } });
-        });
-
-        gsap.to("#parallax-img-1", { y: "10%", scale: 1.1, ease: "none", scrollTrigger: { trigger: ".zoom-parallax-wrap", start: "top bottom", end: "bottom top", scrub: true } });
-
-        const splitContainer = document.querySelector('.split-image-container');
-        if (splitContainer) {
-            splitContainer.addEventListener('click', function() {
-                this.classList.toggle('force-hover');
-                const overlay = this.querySelector('.split-overlay');
-                if (this.classList.contains('force-hover')) { overlay.style.clipPath = 'polygon(0 0, 100% 0, 100% 100%, 0 100%)'; } 
-                else { overlay.style.clipPath = 'polygon(0 0, 0 0, 0 100%, 0% 100%)'; }
-            });
-        }
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        };
+        window.addEventListener('load', hideLoader);
+        setTimeout(hideLoader, 1500); // 1.5s maximum limit
     </script>
 </body>
 </html>
