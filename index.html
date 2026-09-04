@@ -3,238 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Precision dental care for a flawless smile at Aesthetica Roots Kolkata.">
     <title>Aesthetica Roots | Advanced Dental Care</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Outfit', 'sans-serif'], serif: ['Cormorant Garamond', 'serif'], },
+                    colors: { brand: { primary: '#312e81', secondary: '#4338ca', accent: '#818cf8', light: '#e0e7ff' } }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --primary-color: #0f172a;
-            --accent-color: #3b82f6;
-            --text-color: #334155;
-            --bg-color: #f8fafc;
+        html { scroll-behavior: smooth; overscroll-behavior-y: none; }
+        body { background-color: #f8fafc; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        ::selection { background-color: #4f46e5; color: #ffffff; }
+        
+        /* Loader */
+        .loader-overlay { position: fixed; inset: 0; background: #312e81; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease; }
+        
+        /* Premium Floating Pill Navbar */
+        .pill-nav { 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(10px); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
         }
-
-        /* --- Global Reset & Typography --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color); color: var(--text-color);
-            overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased;
-        }
-        html { scroll-behavior: smooth; }
-
-        /* --- Fail-Safe Loader --- */
-        #loader {
-            position: fixed; inset: 0; background: var(--primary-color); z-index: 99999;
-            display: flex; justify-content: center; align-items: center; transition: opacity 0.4s ease;
-        }
-        .spinner {
-            width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.2);
-            border-radius: 50%; border-top-color: #fff; animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- Navigation --- */
-        nav {
-            position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,0.95);
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); backdrop-filter: blur(10px);
-        }
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--primary-color); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 100vh; min-height: 600px; position: relative;
+        
+        /* Parallax Hero */
+        .hero-bg {
             background-image: url('aesthetica-roots-dental-clinic-hero-bg.jpg');
             background-attachment: fixed; background-position: center; background-size: cover;
-            display: flex; align-items: center; justify-content: center; text-align: center; color: white;
-        }
-        .hero::before { content: ''; position: absolute; inset: 0; background: rgba(15, 23, 42, 0.7); }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; padding: 20px; }
-        .hero-content h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
-        .btn-primary {
-            display: inline-block; padding: 16px 32px; background-color: var(--accent-color); color: white;
-            text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 20px; transition: 0.3s;
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-
-        /* --- Layout & Sections --- */
-        .section-container { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 10px; color: var(--primary-color); }
-        .section-subtitle { text-align: center; color: #64748b; margin-bottom: 60px; font-size: 1.1rem; }
-
-        /* --- Doctors Grid --- */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .doctor-card {
-            background: white; border-radius: 20px; padding: 40px 30px; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s;
-        }
-        .doctor-card:hover { transform: translateY(-10px); }
-        .doctor-card img {
-            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-            object-position: top; /* Fixes cropped heads */
-            margin-bottom: 20px; border: 4px solid var(--accent-color);
         }
 
-        /* --- Services Grid --- */
-        .services-container { display: flex; flex-direction: column; gap: 80px; }
-        .service-row { display: flex; align-items: center; gap: 50px; opacity: 0; transform: translateY(40px); transition: 0.8s ease; }
-        .service-row.visible { opacity: 1; transform: translateY(0); }
-        .service-row:nth-child(even) { flex-direction: row-reverse; }
-        .service-text { flex: 1; }
-        .service-text h3 { font-size: 2rem; color: var(--primary-color); margin-bottom: 15px; }
-        .service-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .service-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: 0.5s; }
-        .service-image:hover img { transform: scale(1.05); }
+        /* Image Hover Zoom */
+        .img-zoom-wrap { overflow: hidden; border-radius: 1.5rem; }
+        .img-zoom-wrap img { transition: transform 0.6s ease; }
+        .img-zoom-wrap:hover img { transform: scale(1.05); }
 
-        /* --- CRITICAL MOBILE FIXES --- */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            nav { flex-direction: column; gap: 15px; padding: 15px; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .hero { background-attachment: scroll; /* Fixes iOS parallax bug */ min-height: 80vh; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .section-container { padding: 60px 5%; }
-            .service-row, .service-row:nth-child(even) { flex-direction: column; text-align: center; gap: 30px; }
-            .service-image { width: 100%; max-width: 400px; margin: 0 auto; }
+            .pill-nav { width: 100%; top: 0; border-radius: 0; flex-direction: column; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+            .pill-nav div { margin-top: 12px; flex-wrap: wrap; justify-content: center; gap: 12px; }
+            .hero-bg { background-attachment: scroll; } /* Fixes iOS bug */
         }
+        
+        /* Scrollbars */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
     </style>
 </head>
-<body>
+<body class="text-slate-800 font-sans">
 
-    <div id="loader"><div class="spinner"></div></div>
+    <!-- Loading Screen -->
+    <div class="loader-overlay" id="loader">
+        <h2 class="font-serif text-3xl md:text-5xl italic text-brand-light tracking-widest">Aesthetica Roots</h2>
+    </div>
 
-    <nav>
-        <a href="index.html"><img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Aesthetica Roots" style="height: 40px;"></a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="cavities-toothache.html">Cavities & Pain</a>
-            <a href="other-dental-problems.html">Other Treatments</a>
+    <!-- Premium Floating Menu -->
+    <div class="fixed top-0 md:top-6 left-1/2 transform -translate-x-1/2 z-50 w-full md:w-[90%] max-w-4xl md:rounded-full pill-nav px-6 py-3 flex md:flex-row flex-col justify-between items-center transition-all">
+        <a href="index.html" class="flex items-center">
+            <img src="aesthetica-roots-dental-clinic-logo.jpeg" alt="Aesthetica Roots Logo" class="h-8 md:h-10">
+        </a>
+        <div class="flex gap-4 md:gap-6 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest items-center">
+            <a href="index.html" class="text-brand-primary border-b-2 border-brand-primary pb-1">Home</a>
+            <a href="cavities-toothache.html" class="hover:text-brand-secondary transition-colors">Cavities</a>
+            <a href="other-dental-problems.html" class="hover:text-brand-secondary transition-colors">Surgeries</a>
+            <a href="https://wa.me/917001623621" class="bg-brand-primary text-white px-5 py-2.5 rounded-full hover:bg-brand-secondary transition-colors shadow-md">Consult</a>
         </div>
-    </nav>
+    </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Precision Dental Care for a Flawless Smile</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 20px;">Experience world-class cosmetic and restorative dentistry in Kolkata. Utilizing advanced technology for painless treatments and lasting results.</p>
-            <a href="https://wa.me/917001623621" class="btn-primary">Book Consultation</a>
-        </div>
-    </section>
-
-    <section class="section-container">
-        <h2 class="section-title">Meet Our Surgeons</h2>
-        <p class="section-subtitle">A combined legacy of excellence in modern dentistry.</p>
-        <div class="team-grid">
-            <div class="doctor-card">
-                <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal">
-                <h3>Dr. Pratik Sanyal</h3>
-                <h4 style="color: var(--accent-color); margin: 5px 0 15px 0;">Dental Surgeon (BDS)</h4>
-                <p>Specializing in modern restorative procedures, Dr. Sanyal brings a meticulous approach to diagnostics and patient care.</p>
-            </div>
-            <div class="doctor-card">
-                <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen">
-                <h3>Dr. Shourjya Sen</h3>
-                <h4 style="color: var(--accent-color); margin: 5px 0 15px 0;">Dental Surgeon (BDS)</h4>
-                <p>With extensive clinical experience, Dr. Sen is highly skilled in complex extractions, endodontics, and oral rehabilitation.</p>
+    <!-- Hero Section -->
+    <header class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center hero-bg">
+        <div class="absolute inset-0 bg-slate-900/60 z-0"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mt-16 md:mt-0">
+            <h1 class="gsap-hero font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-6">
+                Precision Dental Care for a <span class="italic text-brand-accent">Flawless Smile.</span>
+            </h1>
+            <p class="gsap-hero text-base md:text-xl text-slate-200 mb-10 font-light max-w-2xl mx-auto">
+                Experience world-class cosmetic and restorative dentistry in Kolkata. Utilizing advanced technology for painless treatments and lasting results.
+            </p>
+            <div class="gsap-hero">
+                <a href="https://wa.me/917001623621" class="inline-block bg-brand-accent text-white font-bold uppercase tracking-widest text-sm px-8 py-4 rounded-full hover:bg-brand-primary transition-all shadow-lg hover:-translate-y-1">
+                    Book Your Consultation
+                </a>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section class="section-container" style="padding-top: 0;">
-        <h2 class="section-title">Comprehensive Treatments</h2>
-        <p class="section-subtitle">Advanced technology for every dental need.</p>
-        
-        <div class="services-container">
-            <div class="service-row">
-                <div class="service-text">
-                    <h3>Laser Treatment</h3>
-                    <p>Modern dentistry relies on advanced laser technology to provide minimally invasive solutions. Laser dentistry minimizes bleeding, reduces swelling, and often eliminates the need for anesthesia during soft tissue procedures.</p>
+    <!-- Doctors Section -->
+    <section class="py-20 md:py-32 bg-white px-6 md:px-12 relative z-20">
+        <div class="max-w-7xl mx-auto text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-4 scroll-fade">Meet Our Surgeons</h2>
+            <p class="text-slate-500 text-lg scroll-fade">A combined legacy of excellence in modern dentistry.</p>
+        </div>
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+            <div class="bg-slate-50 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <img src="dr-pratik-sanyal-dental-surgeon-kolkata.jpg" alt="Dr. Pratik Sanyal" class="w-full h-full object-cover object-top">
                 </div>
-                <div class="service-image"><img src="painless-laser-dentistry-treatment.jpg" alt="Laser Dental Treatment"></div>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Pratik Sanyal</h3>
+                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed">Specializing in modern restorative procedures, Dr. Sanyal brings a meticulous approach to diagnostics and patient care utilizing the latest digital workflows.</p>
             </div>
-
-            <div class="service-row">
-                <div class="service-text">
-                    <h3>Dental Exams & Digital X-Rays</h3>
-                    <p>Preventative care starts with precise diagnostics. We utilize high-resolution digital X-rays that emit up to 90% less radiation than traditional film, detecting issues before they become emergencies.</p>
+            <div class="bg-slate-50 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center shadow-md border border-slate-100 hover:border-brand-light transition-all scroll-fade delay-100">
+                <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-6 border-4 border-white shadow-sm">
+                    <img src="dr-shourjya-sen-dental-surgeon-kolkata.jpg" alt="Dr. Shourjya Sen" class="w-full h-full object-cover object-top">
                 </div>
-                <div class="service-image"><img src="digital-dental-xray-diagnostics.jpg" alt="Digital X-Rays"></div>
-            </div>
-
-            <div class="service-row">
-                <div class="service-text">
-                    <h3>Root Canal Treatment</h3>
-                    <p>When the inner pulp of a tooth becomes infected, a root canal is necessary to save the natural tooth structure. We utilize rotary endodontics to meticulously clean and seal the root canals without pain.</p>
-                </div>
-                <div class="service-image"><img src="rotary-endodontics-root-canal-cleaning.jpg" alt="Root Canal Treatment"></div>
-            </div>
-
-            <div class="service-row">
-                <div class="service-text">
-                    <h3>Teeth Cleaning & Periodontics</h3>
-                    <p>Professional prophylaxis (teeth cleaning) removes hardened plaque and tartar that daily brushing cannot reach. Furthermore, our periodontal therapies address and prevent gum disease.</p>
-                </div>
-                <div class="service-image"><img src="professional-teeth-cleaning-scaling.jpg" alt="Teeth Cleaning"></div>
-            </div>
-
-            <div class="service-row">
-                <div class="service-text">
-                    <h3>Tooth / Wisdom Tooth Extraction</h3>
-                    <p>Whether dealing with severe decay, overcrowding, or impacted wisdom teeth, our extraction protocols prioritize patient comfort using advanced surgical techniques for rapid healing.</p>
-                </div>
-                <div class="service-image"><img src="safe-wisdom-tooth-extraction.jpg" alt="Wisdom Tooth Extraction"></div>
-            </div>
-
-             <div class="service-row">
-                <div class="service-text">
-                    <h3>Tooth Fillings & Restorations</h3>
-                    <p>We use highly durable, tooth-colored composite resins and ceramic materials to restore cavities, seamlessly blending them to match your natural enamel and preserve your smile.</p>
-                </div>
-                <div class="service-image"><img src="tooth-cavity-after-composite-filling.jpg" alt="Tooth Fillings"></div>
-            </div>
-
-             <div class="service-row">
-                <div class="service-text">
-                    <h3>Full Mouth Rehabilitation</h3>
-                    <p>For patients suffering from extensive dental issues, Full Mouth Rehabilitation combines multiple restorative and cosmetic treatments to rebuild your bite, restore function, and completely transform your smile.</p>
-                </div>
-                <div class="service-image"><img src="full-mouth-rehabilitation-implants.jpg" alt="Full Mouth Rehabilitation"></div>
+                <h3 class="font-serif text-2xl md:text-3xl font-bold text-brand-primary mb-1">Dr. Shourjya Sen</h3>
+                <p class="text-brand-secondary font-bold tracking-widest text-xs uppercase mb-4">Dental Surgeon (BDS)</p>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed">With extensive clinical experience, Dr. Sen is highly skilled in complex extractions, endodontics, and comprehensive oral rehabilitation prioritizing anxiety-free surgery.</p>
             </div>
         </div>
     </section>
 
-    <footer style="background: var(--primary-color); color: white; text-align: center; padding: 60px 20px;">
-        <h2 style="margin-bottom: 20px;">Ready for a Healthier Smile?</h2>
-        <a href="https://wa.me/917001623621" class="btn-primary" style="background: #25D366; margin-bottom: 30px;">Chat with us on WhatsApp</a>
-        <p style="color: #94a3b8; font-size: 0.9rem;">© 2026 Aesthetica Roots. All Rights Reserved.</p>
+    <!-- Comprehensive Treatments -->
+    <section class="py-20 md:py-32 bg-slate-50 px-6 md:px-12 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 md:mb-24">
+                <h2 class="font-serif text-3xl md:text-5xl font-bold text-brand-primary mb-4 scroll-fade">Comprehensive Treatments</h2>
+                <p class="text-slate-500 text-lg scroll-fade">Advanced technology for every dental need.</p>
+            </div>
+
+            <div class="space-y-20 md:space-y-32">
+                <!-- Service 1 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 order-2 md:order-1">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Laser Treatment</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Modern dentistry relies on advanced laser technology to provide minimally invasive solutions. Laser dentistry minimizes bleeding, reduces swelling, and often eliminates the need for anesthesia during soft tissue procedures.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 img-zoom-wrap shadow-xl">
+                        <img src="painless-laser-dentistry-treatment.jpg" alt="Laser Dental Treatment" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 img-zoom-wrap shadow-xl">
+                        <img src="digital-dental-xray-diagnostics.jpg" alt="Digital X-Rays" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Digital X-Rays & Diagnostics</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Preventative care starts with precise diagnostics. We utilize high-resolution digital X-rays that emit up to 90% less radiation than traditional film, detecting issues before they become painful emergencies.</p>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 order-2 md:order-1">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Root Canal Treatment</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">When the inner pulp of a tooth becomes infected, a root canal is necessary to save the natural tooth structure. We utilize rotary endodontics to meticulously clean and seal the root canals without pain.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 img-zoom-wrap shadow-xl">
+                        <img src="rotary-endodontics-root-canal-cleaning.jpg" alt="Root Canal Treatment" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 img-zoom-wrap shadow-xl">
+                        <img src="professional-teeth-cleaning-scaling.jpg" alt="Teeth Cleaning" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Teeth Cleaning & Periodontics</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Professional prophylaxis removes hardened plaque and tartar that daily brushing cannot reach. Furthermore, our periodontal therapies address and prevent gum disease to secure your oral foundation.</p>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 order-2 md:order-1">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Surgical Extractions</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">Whether dealing with severe decay, overcrowding, or impacted wisdom teeth, our extraction protocols prioritize patient comfort using advanced surgical techniques for rapid healing.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 img-zoom-wrap shadow-xl">
+                        <img src="safe-wisdom-tooth-extraction.jpg" alt="Wisdom Tooth Extraction" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 img-zoom-wrap shadow-xl">
+                        <img src="tooth-cavity-after-composite-filling.jpg" alt="Tooth Fillings" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Aesthetic Fillings</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">We use highly durable, tooth-colored composite resins and ceramic materials to restore cavities, seamlessly blending them to match your natural enamel and preserve your smile.</p>
+                    </div>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 scroll-fade">
+                    <div class="w-full md:w-1/2 order-2 md:order-1">
+                        <h3 class="font-serif text-3xl font-bold text-brand-primary mb-4">Full Mouth Rehabilitation</h3>
+                        <p class="text-slate-600 leading-relaxed text-lg">For patients suffering from extensive dental issues, Full Mouth Rehabilitation combines multiple restorative and cosmetic treatments to rebuild your bite, restore function, and transform your smile.</p>
+                    </div>
+                    <div class="w-full md:w-1/2 order-1 md:order-2 img-zoom-wrap shadow-xl">
+                        <img src="full-mouth-rehabilitation-implants.jpg" alt="Full Mouth Rehabilitation" class="w-full h-[250px] md:h-[350px] object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16 px-6 text-center">
+        <h2 class="font-serif text-3xl md:text-4xl text-white mb-6">Ready for a Healthier Smile?</h2>
+        <a href="https://wa.me/917001623621" class="inline-block bg-brand-secondary text-white px-10 py-4 rounded-full font-bold mb-10 hover:bg-brand-accent transition-colors shadow-lg">Chat with us on WhatsApp</a>
+        <p class="text-xs tracking-widest uppercase">© 2026 Aesthetica Roots. Kolkata. All rights reserved.</p>
     </footer>
 
+    <!-- GSAP Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        // Fail-safe Loader Logic
-        const removeLoader = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Loader & Hero Animation
+        const hideLoader = () => {
             const loader = document.getElementById('loader');
-            if(loader) { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 400); }
-        };
-        window.addEventListener('load', removeLoader);
-        setTimeout(removeLoader, 1500); // Forces loader off after 1.5s maximum
-
-        // Scroll Reveal Logic (Bug-free on refresh)
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-        document.querySelectorAll('.service-row').forEach(el => {
-            // Check immediately on load for elements already in viewport
-            if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
-            observer.observe(el);
-        });
-
-        // Simple Parallax
-        window.addEventListener('scroll', () => {
-            if(window.innerWidth > 768) {
-                const hero = document.querySelector('.hero');
-                if(hero) hero.style.backgroundPositionY = (window.pageYOffset * 0.4) + 'px';
+            if(loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
             }
+            // Trigger hero text animations immediately after loader fades
+            gsap.fromTo(".gsap-hero", 
+                { y: 30, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out", delay: 0.2 }
+            );
+        };
+        window.addEventListener('load', hideLoader);
+        setTimeout(hideLoader, 1500); // Failsafe timeout
+
+        // 2. Universal Scroll Fade Animation for Sections
+        gsap.utils.toArray('.scroll-fade').forEach(elem => {
+            gsap.fromTo(elem, 
+                { opacity: 0, y: 40 }, 
+                { 
+                    opacity: 1, y: 0, duration: 1, ease: "power2.out", 
+                    scrollTrigger: { trigger: elem, start: "top 85%" } 
+                }
+            );
         });
     </script>
 </body>
